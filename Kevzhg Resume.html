@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-R">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kev Zhang - Solutions Engineer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Neutral Professional -->
+    <!-- Application Structure Plan: A single-page, top-down narrative flow. The key interaction connects the "Skills" section with the "Experience" section. Clicking a skill pill (e.g., 'Value Articulation') will scroll the user to the experience section and apply a highlight to the specific job bullets that prove that skill. This structure was chosen to directly answer a recruiter's core question: "You claim this skill, but where did you prove it?" It turns the static resume into an interactive "proof of claims." -->
+    <!-- Visualization & Content Choices: Resume Info: Skills List -> Goal: Connect skill to proof -> Viz/Method: Clickable HTML/Tailwind "pills" -> Interaction: Vanilla JS onClick scrolls and highlights corresponding experience bullets. | Resume Info: Career History -> Goal: Prioritize current role -> Viz/Method: Tabbed interface -> Interaction: Vanilla JS onClick shows/hides content. | Resume Info: Key Metrics (100k+, 20%) -> Goal: Make achievements stand out -> Viz/Method: Styled HTML/Tailwind "callout" boxes, not charts, as they are single data points. | Justification: This design is focused on interactivity, clarity, and directly linking claims to evidence, which is ideal for a resume. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fdfdfc;
+            color: #1a202c;
+        }
+        .skill-pill {
+            transition: all 0.2s ease-in-out;
+            cursor: pointer;
+        }
+        .skill-pill:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+        .experience-bullet {
+            transition: all 0.3s ease-in-out;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        .experience-bullet::before {
+            content: '●';
+            position: absolute;
+            left: 0.25rem;
+            top: 0.25rem;
+            color: #4f46e5;
+            transition: all 0.3s ease-in-out;
+        }
+        .experience-bullet.highlight {
+            background-color: #eef2ff;
+            border-radius: 0.375rem;
+            transform: scale(1.02);
+            box-shadow: 0 0 15px rgba(79, 70, 229, 0.2);
+        }
+        .experience-bullet.highlight::before {
+            color: #d946ef;
+            transform: scale(1.2);
+        }
+        .job-tab {
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+        .job-tab.active {
+            border-bottom-color: #4f46e5;
+            color: #4f46e5;
+            font-weight: 600;
+        }
+        .job-content {
+            display: none;
+        }
+        .job-content.active {
+            display: block;
+        }
+        .metric-callout {
+            background: linear-gradient(135deg, #f5f3ff 0%, #eef2ff 100%);
+            border-left: 4px solid #4f46e5;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <div class="container mx-auto max-w-5xl px-4 py-12 md:py-20">
+
+        <!-- Section 1: Header -->
+        <header class="text-center md:text-left mb-16">
+            <h1 class="text-5xl md:text-6xl font-bold text-indigo-900">KEV ZHANG</h1>
+            <p class="text-2xl md:text-3xl text-indigo-700 font-medium mt-2">Solutions Engineer / Senior Solutions Consultant</p>
+            <div class="flex justify-center md:justify-start gap-x-6 mt-4 text-sm text-gray-600">
+                <span>519-721-7627</span>
+                <span>&bull;</span>
+                <span>kevzhg@gmail.com</span>
+                <span>&bull;</span>
+                <span>Waterloo, ON</span>
+            </div>
+        </header>
+
+        <!-- Section 2: Summary -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-indigo-900 border-b-2 border-indigo-200 pb-2 mb-6">Professional Summary</h2>
+            <p class="text-lg text-gray-700 leading-relaxed">
+                A hands-on, consultative Solutions Engineer skilled at bridging the gap between complex business needs and powerful technical solutions. I partner with enterprise clients to lead <strong class="font-medium text-indigo-700">deep-dive discovery</strong>, design <strong class="font-medium text-indigo-700">customized solutions</strong>, and deliver <strong class="font-medium text-indigo-700">compelling product demonstrations</strong> to secure technical and commercial wins. My focus is on articulating tangible <strong class="font-medium text-indigo-700">business value</strong> and rapidly building the custom solutions that prove it.
+            </p>
+        </section>
+
+        <!-- Section 3: Skills Explorer -->
+        <section id="skills" class="mb-16">
+            <h2 class="text-3xl font-bold text-indigo-900 border-b-2 border-indigo-200 pb-2 mb-6">Interactive Skills</h2>
+            <p class="text-lg text-gray-700 leading-relaxed mb-8">This is what I do. Click any skill to see the proof in my experience below.</p>
+            
+            <h3 class="text-xl font-semibold text-indigo-800 mb-4">Core Competencies</h3>
+            <div class="flex flex-wrap gap-3">
+                <span class="skill-pill bg-white border border-indigo-200 text-indigo-700 font-medium py-2 px-4 rounded-full shadow-sm" data-skill="se">Solutions Engineering</span>
+                <span class="skill-pill bg-white border border-indigo-200 text-indigo-700 font-medium py-2 px-4 rounded-full shadow-sm" data-skill="discovery">Technical Discovery & Demos</span>
+                <span class="skill-pill bg-white border border-indigo-200 text-indigo-700 font-medium py-2 px-4 rounded-full shadow-sm" data-skill="design">Solution Design & Architecture</span>
+                <span class="skill-pill bg-white border border-indigo-200 text-indigo-700 font-medium py-2 px-4 rounded-full shadow-sm" data-skill="value">Value Articulation</span>
+                <span class="skill-pill bg-white border border-indigo-200 text-indigo-700 font-medium py-2 px-4 rounded-full shadow-sm" data-skill="se">SaaS Sales Cycles</span>
+                <span class="skill-pill bg-white border border-indigo-200 text-indigo-700 font-medium py-2 px-4 rounded-full shadow-sm" data-skill="discovery">Requirements Analysis</span>
+                <span class="skill-pill bg-white border border-indigo-200 text-indigo-700 font-medium py-2 px-4 rounded-full shadow-sm" data-skill="se">Stakeholder Management</span>
+                <span class="skill-pill bg-white border border-indigo-200 text-indigo-700 font-medium py-2 px-4 rounded-full shadow-sm" data-skill="builder">Rapid Prototyping</span>
+            </div>
+
+            <h3 class="text-xl font-semibold text-indigo-800 mt-8 mb-4">Technical Skills</h3>
+            <div class="flex flex-wrap gap-3">
+                <span class="skill-pill bg-gray-100 border border-gray-200 text-gray-700 font-medium py-2 px-4 rounded-full" data-skill="builder">Solution and API Integration</span>
+                <span class="skill-pill bg-gray-100 border border-gray-200 text-gray-700 font-medium py-2 px-4 rounded-full" data-skill="migration">Data Migration</span>
+                <span class="skill-pill bg-gray-100 border border-gray-200 text-gray-700 font-medium py-2 px-4 rounded-full" data-skill="automation">Process Automation</span>
+                <span class="skill-pill bg-gray-100 border border-gray-200 text-gray-700 font-medium py-2 px-4 rounded-full" data-skill="automation">Business Analytics</span>
+                <span class="skill-pill bg-gray-100 border border-gray-200 text-gray-700 font-medium py-2 px-4 rounded-full" data-skill="builder">Custom Application Development</span>
+            </div>
+        </section>
+
+        <!-- Section 4: Career Journey -->
+        <section id="experience" class="mb-16">
+            <h2 class="text-3xl font-bold text-indigo-900 border-b-2 border-indigo-200 pb-2 mb-6">Career Journey</h2>
+            <p class="text-lg text-gray-700 leading-relaxed mb-8">Here's where I've made an impact. My current role is selected by default.</p>
+
+            <div class="flex border-b border-gray-300 mb-8">
+                <div class="job-tab active text-lg py-3 px-6 border-b-4 border-transparent" data-tab="thinklp">ThinkLP (Current)</div>
+                <div class="job-tab text-lg py-3 px-6 border-b-4 border-transparent text-gray-500" data-tab="revolent">Revolent / Zensar</div>
+                <div class="job-tab text-lg py-3 px-6 border-b-4 border-transparent text-gray-500" data-tab="pcc">PointClickCare</div>
+            </div>
+
+            <!-- ThinkLP Content -->
+            <div id="job-thinklp" class="job-content active">
+                <h3 class="text-2xl font-semibold text-indigo-800">Senior Application Specialist / Solutions Consultant</h3>
+                <p class="text-lg font-medium text-gray-600 mb-6">Feb 2023 – Present</p>
+                <ul class="space-y-6">
+                    <li class="experience-bullet text-lg text-gray-700 leading-relaxed" data-skill-map="se discovery">
+                        Partnered with sales and account management to lead technical discovery and solution design for enterprise clients (Fortune 500) through complex, multi-stakeholder sales and implementation cycles.
+                    </li>
+                    <li class="experience-bullet text-lg text-gray-700 leading-relaxed" data-skill-map="value discovery">
+                        Identified a renewal opportunity for a national supermarket chain by proactively discovering unstated business needs and architecting a new path forward that provided significant business value.
+                        <div class="metric-callout p-4 rounded-md mt-4">
+                            <span class="font-bold text-lg text-indigo-800">Key Win:</span>
+                            <span class="text-gray-700">Secured a **$100k+ renewal** by transforming a technical discussion into a strategic, value-based plan.</span>
+                        </div>
+                    </li>
+                    <li class="experience-bullet text-lg text-gray-700 leading-relaxed" data-skill-map="design discovery migration">
+                        Led solution design for a Fortune 100 global apparel client, helping a global team migrate from Excel and legacy systems (SharePoint, Resolver) to a single, collaborative platform. This unified disparate teams (Brand Protection, Grey Market, Litigation) and granted greater control over data.
+                    </li>
+                    <li class="experience-bullet text-lg text-gray-700 leading-relaxed" data-skill-map="automation builder">
+                        Engineered and automated complex business processes for a national logistics provider, increasing driver safety metrics by capturing and visualizing data ingested via SFTP and APIs to enhance manager visibility.
+                    </li>
+                    <li class="experience-bullet text-lg text-gray-700 leading-relaxed" data-skill-map="builder design">
+                        Designed and built tailored "builder" solutions, including rapid-turnaround (2-week) data integrations for the global apparel client to meet a critical go-live deadline.
+                    </li>
+                    <li class="experience-bullet text-lg text-gray-700 leading-relaxed" data-skill-map="builder automation migration">
+                        Rapidly designed and built a high-value custom email service for a national quick-service restaurant chain; this solution automated case creation, helping a global team migrate from Excel to gain greater data control and collaborate more effectively.
+                    </li>
+                    <li class="experience-bullet text-lg text-gray-700 leading-relaxed" data-skill-map="builder">
+                        Leveraged modern AI tools to streamline development workflows, accelerating the creation of new opportunities and enabling rapid-turnaround custom solutions.
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Revolent Content -->
+            <div id="job-revolent" class="job-content">
+                <h3 class="text-2xl font-semibold text-indigo-800">Salesforce Consultant / Business Analyst</h3>
+                <p class="text-lg font-medium text-gray-600 mb-6">Mar 2021 – Jan 2023</p>
+                <ul class="space-y-6">
+                    <li class="experience-bullet text-lg text-gray-700 leading-relaxed" data-skill-map="discovery">
+                        Collaborated with clients and end-users to gather, analyze, and translate business requirements into technical solutions for B2C websites.
+                    </li>
+                    <li class="experience-bullet text-lg text-gray-700 leading-relaxed" data-skill-map="design">
+                        Worked with development teams to design solutions that met business requirements.
+                        <div class="metric-callout p-4 rounded-md mt-4">
+                            <span class="font-bold text-lg text-indigo-800">Key Metric:</span>
+                            <span class="text-gray-700">Contributed to a **20% increase** in customer purchase rates through improved solution design.</span>
+                        </div>
+                    </li>
+                    <li class="experience-bullet text-lg text-gray-700 leading-relaxed" data-skill-map="discovery se">
+                        Led key client meetings, including requirements sessions, system demonstrations, and user acceptance testing (UAT).
+                    </li>
+                </ul>
+            </div>
+
+            <!-- PointClickCare Content -->
+            <div id="job-pcc" class="job-content">
+                <h3 class="text-2xl font-semibold text-indigo-800">Software Engineer</h3>
+                <p class="text-lg font-medium text-gray-600 mb-6">Feb 2019 – Feb 2021</p>
+                <ul class="space-y-6">
+                    <li class="experience-bullet text-lg text-gray-700 leading-relaxed" data-skill-map="builder">
+                        Developed full-stack features for a microservices-based health project using React, Typescript, and Kotlin, significantly improving system performance by implementing new logic to reduce system cache.
+                    </li>
+                    <li class="experience-bullet text-lg text-gray-700 leading-relaxed" data-skill-map="builder">
+                        Improved CI/CD deployment efficiency and achieved 95% end-to-end test success rates by developing robust integration and E2E tests.
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Section 5: Project Showcase -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-indigo-900 border-b-2 border-indigo-200 pb-2 mb-6">Current Projects</h2>
+            <p class="text-lg text-gray-700 leading-relaxed mb-8">Always learning. Here's what I'm focused on now.</p>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-md border border-gray-100">
+                    <h3 class="text-xl font-semibold text-indigo-800 mb-2">LLM Course & Implementation</h3>
+                    <p class="text-gray-600 mb-4">Actively following the comprehensive 'llm-course' (mlabonne/llm-course), implementing and studying the complete lifecycle of Large Language Models. This includes hands-on work with transformer architecture, tokenization, pre-training, and fine-tuning.</p>
+                    <a href="https://github.com/mlabonne/llm-course" target="_blank" class="font-medium text-indigo-600 hover:text-indigo-800">View Course on GitHub &rarr;</a>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md border border-gray-100">
+                    <h3 class="text-xl font-semibold text-indigo-800 mb-2">Serverless LLM Fine-Tuning</h3>
+                    <p class="text-gray-600 mb-4">Developing a project to fine-tune a language model using serverless cloud functions (e.g., AWS Lambda) for scalable, on-demand training. This project involves self-directed study in Python for model scripting, data preparation, and deployment.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 6: Education -->
+        <footer class="border-t border-gray-200 pt-12 text-center">
+            <h3 class="text-2xl font-bold text-indigo-900">Education</h3>
+            <p class="text-lg text-indigo-700 font-medium mt-2">Bachelor of Applied Science, Electrical & Computer Engineering</p>
+            <p class="text-lg text-gray-600">University of Waterloo</p>
+        </footer>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const skillPills = document.querySelectorAll('.skill-pill');
+            const experienceBullets = document.querySelectorAll('.experience-bullet');
+            const experienceSection = document.getElementById('experience');
+
+            skillPills.forEach(pill => {
+                pill.addEventListener('click', () => {
+                    const skill = pill.getAttribute('data-skill');
+                    
+                    // Remove highlight from all
+                    experienceBullets.forEach(bullet => {
+                        bullet.classList.remove('highlight');
+                    });
+
+                    // Add highlight to matching bullets
+                    const matchingBullets = document.querySelectorAll(`.experience-bullet[data-skill-map*="${skill}"]`);
+                    matchingBullets.forEach(bullet => {
+                        bullet.classList.add('highlight');
+                    });
+
+                    // Scroll to the experience section
+                    if (matchingBullets.length > 0) {
+                        experienceSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                });
+            });
+
+            const jobTabs = document.querySelectorAll('.job-tab');
+            const jobContents = document.querySelectorAll('.job-content');
+
+            jobTabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const tabId = tab.getAttribute('data-tab');
+
+                    // Update tabs
+                    jobTabs.forEach(t => t.classList.remove('active', 'text-gray-500'));
+                    tab.classList.add('active');
+                    jobTabs.forEach(t => {
+                        if (!t.classList.contains('active')) {
+                            t.classList.add('text-gray-500');
+                        }
+                    });
+
+                    // Update content
+                    jobContents.forEach(content => {
+                        content.classList.remove('active');
+                    });
+                    document.getElementById(`job-${tabId}`).classList.add('active');
+
+                    // Clear highlights when changing tabs
+                    experienceBullets.forEach(bullet => {
+                        bullet.classList.remove('highlight');
+                    });
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
