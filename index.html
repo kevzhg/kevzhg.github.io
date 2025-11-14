@@ -14,6 +14,8 @@
         .skill-tag {
             transition: all 0.2s ease-in-out;
             will-change: transform, box-shadow;
+            font-size: 0.875rem; /* text-sm */
+            padding: 0.25rem 0.75rem; /* py-1 px-3 */
         }
         .skill-tag:hover {
             transform: translateY(-2px);
@@ -26,35 +28,68 @@
         }
         .experience-item, .project-item {
             transition: all 0.3s ease-in-out;
-            will-change: opacity, transform;
+            will-change: background-color, border-color;
         }
-        .item-fade-out {
-            opacity: 0.2;
-            transform: scale(0.98);
+
+        /* Styles for bullet-point highlighting */
+        .experience-bullet {
+            transition: all 0.2s ease-in-out;
+            padding: 4px 6px;
+            border-radius: 6px;
+            margin-left: -6px; /* Offset padding to align with list-disc */
         }
-        .item-fade-in {
-            opacity: 1;
-            transform: scale(1);
-        }
-        .highlight {
+        .bullet-highlight {
             background-color: #dbeafe; /* bg-blue-100 */
-            color: #1e40af; /* text-blue-800 */
-            font-weight: 500;
-            border-radius: 4px;
-            padding: 1px 4px;
+        }
+        
+        /* Style for project card highlighting */
+        .project-item.project-highlight {
+            background-color: #eff6ff; /* bg-blue-50 */
+            border-color: #bfdbfe; /* border-blue-200 */
+        }
+
+        /* Styles for section highlighting */
+        section {
+            transition: all 0.3s ease-in-out;
+            border-radius: 8px; /* Rounded corners for the highlight */
+            border: 2px solid transparent; /* Placeholder for smooth transition */
+            padding-bottom: 1rem; /* Further reduced padding */
+            padding-top: 0.5rem; /* Reduced top padding */
+        }
+        header + section {
+            padding-top: 0; /* Remove padding from first section */
+        }
+        section.section-highlight {
+            background-color: #eff6ff; /* bg-blue-50 */
+            border-color: #dbeafe; /* border-blue-100 */
+        }
+        /* Adjust section headers to align with new padding */
+        section h3 {
+            margin-top: -0.5rem; /* Adjusted alignment */
+            padding-top: 0.5rem; /* Add padding back to header */
+            margin-bottom: 1.25rem; /* mb-5 */
+            border-bottom-width: 1px;
+            padding-bottom: 0.75rem; /* pb-3 */
+        }
+        header + section h3 {
+             margin-top: 0; /* No negative margin for first section */
+        }
+        /* Remove bottom padding from last section */
+        section:last-of-type {
+            padding-bottom: 0;
         }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
     <!-- Chosen Palette: Tailwind Grays + Blue Accent -->
-    <!-- Application Structure Plan: A single-page portfolio designed for a recruiter. It's structured as a vertical narrative: Header (who I am), Skills (what I do), Experience (how I've done it), Projects (proof of initiative). The core interaction is a filter: clicking a skill in the "Skills" section instantly filters the "Experience" and "Projects" sections to show only items matching that skill. This provides immediate, tangible proof for every competency, making the resume explorable and answering the recruiter's "where did you use this?" question instantly. -->
-    <!-- Visualization & Content Choices: Resume Info -> Skills list. Goal -> Allow user to explore competencies. Viz -> Interactive "tags" (HTML buttons). Interaction -> Click. Justification -> Recruiters are skill-focused; this interaction model is intuitive (like a e-commerce filter) and directly connects claims (skills) to evidence (experience). Resume Info -> Job bullets. Goal -> Show evidence for skills. Viz -> Card-based list. Interaction -> Filtered visibility (JS). Justification -> This dynamic filtering is the "wow" factor, transforming a static list into a live-validated experience. NO SVG/Mermaid needed. -->
+    <!-- Application Structure Plan: Skills-first layout. Header, Skills, Experience, Projects. Core interaction is filtering: clicking a skill tag now highlights individual experience bullets and project cards, providing granular proof without fading. -->
+    <!-- Visualization & Content Choices: Resume Info -> Skills list. Goal -> Allow user to explore competencies. Viz -> Interactive "tags". Interaction -> Click. Justfication -> Intuitive filtering model. Resume Info -> Job bullets. Goal -> Show granular evidence for skills. Viz -> List items. Interaction -> Add/Remove highlight class (JS). Justification -> This is a superior UX, as it keeps all job context visible and pinpoints relevance. -->
     <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
 
-    <div class="max-w-6xl mx-auto p-4 md:p-8 lg:p-12">
+    <div class="max-w-6xl mx-auto p-4 md:p-6 lg:p-10"> <!-- Reduced container padding -->
         
         <!-- Header -->
-        <header class="flex flex-col md:flex-row justify-between items-start md:items-center mb-10 md:mb-16">
+        <header class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 md:mb-6"> <!-- Reduced margin-bottom -->
             <div>
                 <h1 class="text-4xl lg:text-5xl font-bold text-gray-900">Kev Zhang</h1>
                 <h2 class="text-xl lg:text-2xl font-medium text-blue-600 mt-1">Solutions Engineer / Senior Solutions Consultant</h2>
@@ -72,46 +107,31 @@
         </header>
 
         <!-- Skills Section -->
-        <section id="skills" class="mb-10 md:mb-16">
-            <h3 class="text-2xl font-bold text-gray-900 mb-6 border-b pb-3">Technical Skills & Competencies</h3>
+        <section id="skills" class="mb-0 md:mb-0">
+            <h3 class="text-2xl font-bold text-gray-900">Technical Skills & Competencies</h3>
             
-            <div class="mb-6">
+            <div class="mb-5"> <!-- Reduced margin-bottom -->
                 <p class="text-gray-600 font-medium mb-3">Interact with my skills. Click a skill to filter my experience.</p>
                 <div id="skills-container" class="flex flex-wrap gap-2">
                     <!-- Skills will be dynamically injected here -->
                 </div>
             </div>
-
-            <div class="p-4 bg-gray-100 rounded-lg">
-                <div class="mb-2">
-                    <span class="font-semibold text-gray-700">Core Competencies:</span>
-                    <span class="text-gray-600 text-sm md:text-base">Solutions Engineering, Solution Selling, Technical Discovery & Demos, Validation Event (POV) Scoping, RFI/RFP Response, Value Articulation, Stakeholder Management</span>
-                </div>
-                <div class="mb-2">
-                    <span class="font-semibold text-gray-700">Technical Skills:</span>
-                    <span class="text-gray-600 text-sm md:text-base">API Integration, Data Migration, Process Automation, Business Analytics, Custom Application Development</span>
-                </div>
-                <div>
-                    <span class="font-semibold text-gray-700">AI / ML Familiarity:</span>
-                    <span class="text-gray-600 text-sm md:text-base">Actively implementing and studying the complete lifecycle of Large Language Models (transformer architecture, pre-training, and fine-tuning).</span>
-                </div>
-            </div>
         </section>
 
         <!-- Experience Section -->
-        <section id="experience" class="mb-10 md:mb-16">
-            <h3 class="text-2xl font-bold text-gray-900 mb-6 border-b pb-3">Professional Experience</h3>
+        <section id="experience" class="mb-0 md:mb-0">
+            <h3 class="text-2xl font-bold text-gray-900">Professional Experience</h3>
             
-            <div id="experience-container" class="space-y-8">
+            <div id="experience-container" class="space-y-6"> <!-- Reduced space-y -->
                 <!-- Experience items will be dynamically injected here -->
             </div>
         </section>
 
         <!-- Projects Section -->
-        <section id="projects">
-            <h3 class="text-2xl font-bold text-gray-900 mb-6 border-b pb-3">Projects</h3>
+        <section id="projects" class="pb-0 mb-0">
+            <h3 class="text-2xl font-bold text-gray-900">Projects</h3>
             
-            <div id="projects-container" class="space-y-8">
+            <div id="projects-container" class="space-y-6"> <!-- Reduced space-y -->
                 <!-- Project items will be dynamically injected here -->
             </div>
         </section>
@@ -119,21 +139,19 @@
     </div>
 
     <script>
+        // Updated and condensed skills list for the buttons
         const skills = [
             'Solutions Engineering',
             'Solution Selling',
             'Technical Discovery & Demos',
-            'Validation Event (POV) Scoping',
-            'RFI/RFP Response',
-            'Value Articulation',
+            'POC / POV Delivery',
+            'RFI / RFP Response',
+            'Value-Driven Solutioning',
             'Stakeholder Management',
-            'API Integration',
-            'Data Migration',
-            'Process Automation',
-            'Business Analytics',
+            'API & Data Integration',
+            'Process Automation & Analytics',
             'Custom Application Development',
-            'AI / ML',
-            'Large Language Models',
+            'AI / ML (LLMs)',
             'Engineering Mindset'
         ];
 
@@ -143,12 +161,13 @@
                 company: 'ThinkLP',
                 date: 'Feb 2023 – Present',
                 bullets: [
-                    { text: 'Owned the technical/solutions portion of complex B2B sales cycles, acting as an embedded partner to sales and clients to deconstruct problems, prove business value, and secure the technical win.', tags: ['Solutions Engineering', 'Solution Selling', 'Value Articulation'] },
-                    { text: 'Identified a $100k+ renewal opportunity by using proactive discovery to find an unstated, high-value need; architected and demoed a new solution that captured this value, leading to a major renewal.', tags: ['Technical Discovery & Demos', 'Value Articulation', 'Solution Selling'] },
-                    { text: 'Architected a complex investigations platform for a Fortune 100 apparel client, unifying siloed teams (Brand Protection, Litigation) by integrating a complex web of legacy systems (Salesforce, ServiceNow, HR feeds, Airtable) into a single source of truth.', tags: ['Solutions Engineering', 'API Integration', 'Data Migration', 'Stakeholder Management'] },
-                    { text: 'Scoped, built, and delivered high-fidelity custom demos and POVs using client data, providing clear, decisive insights into a credible path for simplifying their complex workflows.', tags: ['Validation Event (POV) Scoping', 'Technical Discovery & Demos', 'Business Analytics'] },
-                    { text: 'Proved platform agility by architecting, building, and deploying a critical, last-minute data integration in under two weeks, securing a complex go-live.', tags: ['Custom Application Development', 'API Integration'] },
-                    { text: 'Maintained all presales notes, technical collateral, and solution designs in Salesforce and SharePoint to contribute to team-wide best practices.', tags: ['Solutions Engineering', 'RFI/RFP Response'] }
+                    { text: 'Owned the technical/solutions portion of complex B2B sales cycles, acting as an embedded partner to sales and clients to deconstruct problems, prove business value, and secure the technical win.', tags: ['Solutions Engineering', 'Solution Selling', 'Value-Driven Solutioning', 'Engineering Mindset'] },
+                    { text: 'Concurrently managed multiple presales engagements and post-sales application development projects, setting and managing stakeholder expectations, defining technical timelines, and re-prioritizing discovery, demos, and builds to meet competing deal and project deadlines.', tags: ['Stakeholder Management', 'Solutions Engineering', 'Custom Application Development', 'POC / POV Delivery', 'Solution Selling', 'Engineering Mindset'] },
+                    { text: 'Scoped, built, and delivered high-fidelity custom demos and POVs using client data, providing clear, decisive insights into a credible path for simplifying their complex workflows.', tags: ['POC / POV Delivery', 'Technical Discovery & Demos', 'Process Automation & Analytics', 'Engineering Mindset'] },
+                    { text: 'Identified a $100k+ renewal opportunity by using proactive discovery to find an unstated, high-value need; architected and demoed a new solution that captured this value, leading to a major renewal.', tags: ['Technical Discovery & Demos', 'Value-Driven Solutioning', 'Solution Selling', 'Engineering Mindset'] },
+                    { text: 'Architected a complex investigations platform for a Fortune 100 apparel client, unifying siloed teams (Brand Protection, Litigation) by integrating a complex web of legacy systems (Salesforce, ServiceNow, HR feeds, Airtable) into a single source of truth.', tags: ['Solutions Engineering', 'API & Data Integration', 'Stakeholder Management', 'Engineering Mindset'] },
+                    { text: 'Proved platform agility by architecting, building, and deploying a critical, last-minute data integration in under two weeks, securing a complex go-live.', tags: ['Custom Application Development', 'API & Data Integration', 'Engineering Mindset'] },
+                    { text: 'Maintained all presales notes, technical collateral, and solution designs in Salesforce and SharePoint to contribute to team-wide best practices.', tags: ['Solutions Engineering', 'RFI / RFP Response'] }
                 ]
             },
             {
@@ -156,9 +175,9 @@
                 company: 'Revolent / Zensar',
                 date: 'Mar 2021 – Jan 2023',
                 bullets: [
-                    { text: 'Acted as the primary technical partner for clients, deconstructing complex business requirements and translating them into detailed technical solutions for B2C websites.', tags: ['Solutions Engineering', 'Stakeholder Management'] },
-                    { text: 'Partnered with sales to provide technical expertise and deliver tailored system demonstrations, focusing on enhancing workflows rather than just migrating them.', tags: ['Solution Selling', 'Technical Discovery & Demos', 'Value Articulation'] },
-                    { text: 'Led key client meetings, including requirements sessions, system demonstrations, and user acceptance testing (UAT).', tags: ['Stakeholder Management', 'Process Automation'] }
+                    { text: 'Acted as the primary technical partner for clients, deconstructing complex business requirements and translating them into detailed technical solutions for B2C websites.', tags: ['Solutions Engineering', 'Stakeholder Management', 'Engineering Mindset'] },
+                    { text: 'Partnered with sales to provide technical expertise and deliver tailored system demonstrations, focusing on enhancing workflows rather than just migrating them.', tags: ['Solution Selling', 'Technical Discovery & Demos', 'Value-Driven Solutioning'] },
+                    { text: 'Led key client meetings, including requirements sessions, system demonstrations, and user acceptance testing (UAT).', tags: ['Stakeholder Management', 'Process Automation & Analytics'] }
                 ]
             },
             {
@@ -167,7 +186,7 @@
                 date: 'Feb 2019 – Feb 2021',
                 bullets: [
                     { text: 'Developed full-stack features for a microservices-based project, gaining a deep ”engineering mindset” by deconstructing performance issues and optimizing system architecture.', tags: ['Engineering Mindset', 'Custom Application Development'] },
-                    { text: 'Improved CI/CD deployment efficiency and achieved 95% end-to-end test success rates by developing robust integration and E2E tests.', tags: ['Engineering Mindset', 'Process Automation'] }
+                    { text: 'Improved CI/CD deployment efficiency and achieved 95% end-to-end test success rates by developing robust integration and E2E tests.', tags: ['Engineering Mindset', 'Process Automation & Analytics'] }
                 ]
             }
         ];
@@ -176,12 +195,12 @@
             {
                 name: 'LLM Course & Implementation',
                 description: "Actively following the comprehensive 'llm-course' (mlabonne/llm-course), implementing and studying the complete lifecycle of Large Language Models. This includes hands-on work with transformer architecture, tokenization, pre-training, and fine-tuning.",
-                tags: ['AI / ML', 'Large Language Models']
+                tags: ['AI / ML (LLMs)', 'Engineering Mindset']
             },
             {
                 name: 'Serverless LLM Fine-Tuning',
                 description: "Developing a project to fine-tune a language model using serverless cloud functions (e.g., AWS Lambda) for scalable, on-demand training. This project involves self-directed study in Python for model scripting, data preparation, and deployment.",
-                tags: ['AI / ML', 'Large Language Models', 'Custom Application Development', 'API Integration']
+                tags: ['AI / ML (LLMs)', 'Custom Application Development', 'API & Data Integration', 'Engineering Mindset']
             }
         ];
 
@@ -189,15 +208,13 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             const skillsContainer = document.getElementById('skills-container');
-            const experienceContainer = document.getElementById('experience-container');
-            const projectsContainer = document.getElementById('projects-container');
             const downloadBtn = document.getElementById('download-btn');
 
             // 1. Populate Skills
             skills.forEach(skill => {
                 const tag = document.createElement('button');
                 tag.textContent = skill;
-                tag.className = 'skill-tag bg-white text-blue-600 font-medium py-2 px-4 rounded-full shadow-sm border border-gray-200 cursor-pointer';
+                tag.className = 'skill-tag bg-white text-blue-600 font-medium py-1 px-3 rounded-full shadow-sm border border-gray-200 cursor-pointer'; // Smaller padding/font
                 tag.onclick = () => toggleSkill(skill);
                 skillsContainer.appendChild(tag);
             });
@@ -233,64 +250,47 @@
         }
 
         function filterItems() {
-            // Filter Experience
-            document.querySelectorAll('.experience-item').forEach(item => {
-                const itemSkills = JSON.parse(item.dataset.skills);
-                if (!selectedSkill || itemSkills.includes(selectedSkill)) {
-                    item.classList.remove('item-fade-out');
-                    item.classList.add('item-fade-in');
-                    highlightText(item, selectedSkill);
+            // Filter Experience Bullets
+            document.querySelectorAll('.experience-bullet').forEach(bullet => {
+                const itemSkills = JSON.parse(bullet.dataset.tags);
+                if (!selectedSkill) {
+                    bullet.classList.remove('bullet-highlight'); // Remove highlight if no skill selected
+                } else if (itemSkills.includes(selectedSkill)) {
+                    bullet.classList.add('bullet-highlight'); // Add highlight
                 } else {
-                    item.classList.remove('item-fade-in');
-                    item.classList.add('item-fade-out');
-                    highlightText(item, null); // Remove highlights
+                    bullet.classList.remove('bullet-highlight'); // Remove highlight
                 }
             });
 
-            // Filter Projects
+            // Filter Projects (now highlights card, doesn't fade)
             document.querySelectorAll('.project-item').forEach(item => {
                 const itemSkills = JSON.parse(item.dataset.skills);
-                if (!selectedSkill || itemSkills.includes(selectedSkill)) {
-                    item.classList.remove('item-fade-out');
-                    item.classList.add('item-fade-in');
-                    highlightText(item, selectedSkill);
+                if (!selectedSkill) {
+                    item.classList.remove('project-highlight'); // Remove highlight
+                } else if (itemSkills.includes(selectedSkill)) {
+                    item.classList.add('project-highlight'); // Add highlight
                 } else {
-                    item.classList.remove('item-fade-in');
-                    item.classList.add('item-fade-out');
-                    highlightText(item, null); // Remove highlights
+                    item.classList.remove('project-highlight'); // Remove highlight
                 }
             });
+            
+            // Highlight Projects Section for AI/ML
+            const projectsSection = document.getElementById('projects');
+            if (selectedSkill === 'AI / ML (LLMs)') {
+                projectsSection.classList.add('section-highlight');
+            } else {
+                projectsSection.classList.remove('section-highlight');
+            }
         }
         
-        function highlightText(element, skill) {
-            const lists = element.querySelectorAll('li, p');
-            lists.forEach(item => {
-                let innerHTML = item.innerHTML;
-                
-                // Remove old highlights
-                innerHTML = innerHTML.replace(/<span class="highlight">/g, '');
-                innerHTML = innerHTML.replace(/<\/span>/g, '');
-
-                // Add new highlights
-                if (skill) {
-                    const regex = new RegExp(`(${skill})`, 'gi');
-                    innerHTML = innerHTML.replace(regex, '<span class="highlight">$1</span>');
-                }
-                item.innerHTML = innerHTML;
-            });
-        }
-
         function renderExperience() {
             const container = document.getElementById('experience-container');
             container.innerHTML = '';
             experiences.forEach(exp => {
                 const item = document.createElement('div');
-                item.className = 'experience-item bg-white p-6 rounded-lg shadow-sm border border-gray-200';
+                // Keep the experience-item class for general styling
+                item.className = 'experience-item bg-white p-5 rounded-lg shadow-sm border border-gray-200'; // Reduced padding
                 
-                // Collect all tags for this item
-                const allTags = exp.bullets.reduce((acc, bullet) => [...acc, ...bullet.tags], []);
-                item.dataset.skills = JSON.stringify([...new Set(allTags)]); // Store unique skills
-
                 item.innerHTML = `
                     <div class="flex flex-col sm:flex-row justify-between sm:items-center mb-2">
                         <h4 class="text-xl font-bold text-gray-900">${exp.role}</h4>
@@ -298,7 +298,11 @@
                     </div>
                     <p class="font-semibold text-blue-600 text-lg mb-3">${exp.company}</p>
                     <ul class="list-disc list-outside pl-5 space-y-2 text-gray-700">
-                        ${exp.bullets.map(bullet => `<li>${bullet.text}</li>`).join('')}
+                        ${exp.bullets.map(bullet => `
+                            <li class="experience-bullet" data-tags='${JSON.stringify(bullet.tags)}'>
+                                ${bullet.text}
+                            </li>
+                        `).join('')}
                     </ul>
                 `;
                 container.appendChild(item);
@@ -310,7 +314,7 @@
             container.innerHTML = '';
             projects.forEach(proj => {
                 const item = document.createElement('div');
-                item.className = 'project-item bg-white p-6 rounded-lg shadow-sm border border-gray-200';
+                item.className = 'project-item bg-white p-5 rounded-lg shadow-sm border border-gray-200'; // Reduced padding
                 item.dataset.skills = JSON.stringify(proj.tags);
 
                 item.innerHTML = `
@@ -331,16 +335,17 @@
 A hands-on, consultative Solutions Engineer skilled at bridging the gap between complex business needs and powerful technical solutions. I partner with enterprise clients to lead deep-dive discovery, design customized solutions, and deliver compelling product demonstrations to secure technical and commercial wins. My focus is on articulating tangible business value and rapidly building the custom solutions that prove it.
 
 ### TECHNICAL SKILLS & COMPETENCIES
-**Core Competencies:** Solutions Engineering, Solution Selling, Technical Discovery & Demos, Validation Event (POV) Scoping, RFI/RFP Response, Value Articulation, Stakeholder Management
+**Core Competencies:** Solutions Engineering, Solution Selling, Technical Discovery & Demos, POC & POV Scoping and Delivery, RFI/RFP Response, Value-Driven Solutioning
 **Technical Skills:** API Integration, Data Migration, Process Automation, Business Analytics, Custom Application Development
 **AI / ML Familiarity:** Actively implementing and studying the complete lifecycle of Large Language Models (transformer architecture, pre-training, and fine-tuning).
 
 ### PROFESSIONAL EXPERIENCE
 **Senior Application Specialist / Solutions Consultant** | **ThinkLP** | **Feb 2023 – Present**
 * Owned the technical/solutions portion of complex B2B sales cycles, acting as an embedded partner to sales and clients to deconstruct problems, prove business value, and secure the technical win.
+* Concurrently managed multiple presales engagements and post-sales application development projects, setting and managing stakeholder expectations, defining technical timelines, and re-prioritizing discovery, demos, and builds to meet competing deal and project deadlines.
+* Scoped, built, and delivered high-fidelity custom demos and POVs using client data, providing clear, decisive insights into a credible path for simplifying their complex workflows.
 * Identified a $100k+ renewal opportunity by using proactive discovery to find an unstated, high-value need; architected and demoed a new solution that captured this value, leading to a major renewal.
 * Architected a complex investigations platform for a Fortune 100 apparel client, unifying siloed teams (Brand Protection, Litigation) by integrating a complex web of legacy systems (Salesforce, ServiceNow, HR feeds, Airtable) into a single source of truth.
-* Scoped, built, and delivered high-fidelity custom demos and POVs using client data, providing clear, decisive insights into a credible path for simplifying their complex workflows.
 * Proved platform agility by architecting, building, and deploying a critical, last-minute data integration in under two weeks, securing a complex go-live.
 * Maintained all presales notes, technical collateral, and solution designs in Salesforce and SharePoint to contribute to team-wide best practices.
 
