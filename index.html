@@ -1,384 +1,605 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-R">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kev Zhang - Solutions Engineer</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Kev Zhang - Senior Solutions Engineer</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --text-color: #333;
+            --light-bg: #f8f9fa;
+            --border-color: #e1e8ed;
+        }
+
         body {
-            font-family: 'Inter', sans-serif;
-            scroll-behavior: smooth;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
         }
-        .skill-tag {
-            transition: all 0.2s ease-in-out;
-            will-change: transform, box-shadow;
-            font-size: 0.875rem; /* text-sm */
-            padding: 0.25rem 0.75rem; /* py-1 px-3 */
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            animation: fadeIn 0.6s ease-in;
         }
-        .skill-tag:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
-        .skill-tag.selected {
-            background-color: #3b82f6; /* bg-blue-600 */
+
+        .nav {
+            background: var(--primary-color);
+            padding: 15px 30px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
             color: white;
-            box-shadow: 0 4px 14px rgba(59, 130, 246, 0.3);
-        }
-        .experience-item, .project-item {
-            transition: all 0.3s ease-in-out;
-            will-change: background-color, border-color;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
         }
 
-        /* Styles for bullet-point highlighting */
-        .experience-bullet {
-            transition: all 0.2s ease-in-out;
-            padding: 4px 6px;
-            border-radius: 6px;
-            margin-left: -6px; /* Offset padding to align with list-disc */
-        }
-        .bullet-highlight {
-            background-color: #dbeafe; /* bg-blue-100 */
-        }
-        
-        /* Style for project card highlighting */
-        .project-item.project-highlight {
-            background-color: #eff6ff; /* bg-blue-50 */
-            border-color: #bfdbfe; /* border-blue-200 */
+        .nav-links a:hover {
+            color: var(--secondary-color);
         }
 
-        /* Styles for section highlighting */
-        section {
-            transition: all 0.3s ease-in-out;
-            border-radius: 8px; /* Rounded corners for the highlight */
-            border: 2px solid transparent; /* Placeholder for smooth transition */
-            padding-bottom: 1rem; /* Further reduced padding */
-            padding-top: 0.5rem; /* Reduced top padding */
+        .print-btn {
+            background: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.3s;
         }
-        header + section {
-            padding-top: 0; /* Remove padding from first section */
+
+        .print-btn:hover {
+            background: #2980b9;
         }
-        section.section-highlight {
-            background-color: #eff6ff; /* bg-blue-50 */
-            border-color: #dbeafe; /* border-blue-100 */
+
+        .header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #34495e 100%);
+            color: white;
+            padding: 50px 40px;
+            text-align: center;
         }
-        /* Adjust section headers to align with new padding */
-        section h3 {
-            margin-top: -0.5rem; /* Adjusted alignment */
-            padding-top: 0.5rem; /* Add padding back to header */
-            margin-bottom: 1.25rem; /* mb-5 */
-            border-bottom-width: 1px;
-            padding-bottom: 0.75rem; /* pb-3 */
+
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
         }
-        header + section h3 {
-             margin-top: 0; /* No negative margin for first section */
+
+        .header .title {
+            font-size: 1.5em;
+            color: var(--secondary-color);
+            margin-bottom: 20px;
         }
-        /* Remove bottom padding from last section */
-        section:last-of-type {
-            padding-bottom: 0;
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .contact-info a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .contact-info a:hover {
+            color: var(--secondary-color);
+        }
+
+        .section {
+            padding: 40px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s, transform 0.6s;
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section:nth-child(even) {
+            background: var(--light-bg);
+        }
+
+        .section h2 {
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--secondary-color);
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+            font-size: 1.8em;
+            display: inline-block;
+        }
+
+        .summary {
+            font-size: 1.05em;
+            line-height: 1.8;
+            text-align: justify;
+        }
+
+        .skills-grid {
+            display: grid;
+            gap: 20px;
+        }
+
+        .skill-category {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .skill-category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .skill-category strong {
+            color: var(--secondary-color);
+            font-size: 1.1em;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .experience-item {
+            margin-bottom: 35px;
+            padding: 25px;
+            background: white;
+            border-radius: 8px;
+            border-left: 4px solid var(--secondary-color);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .experience-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .experience-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+        }
+
+        .job-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .job-date {
+            color: #666;
+            font-style: italic;
+            font-size: 0.95em;
+        }
+
+        .company-name {
+            color: var(--secondary-color);
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+
+        .experience-item ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .experience-item li {
+            padding: 10px 0 10px 30px;
+            position: relative;
+            line-height: 1.7;
+            transition: background 0.3s;
+        }
+
+        .experience-item li:hover {
+            background: var(--light-bg);
+            border-radius: 5px;
+        }
+
+        .experience-item li::before {
+            content: "▸";
+            position: absolute;
+            left: 10px;
+            color: var(--secondary-color);
+            font-weight: bold;
+        }
+
+        .project-item {
+            margin-bottom: 20px;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent-color);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .project-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .project-title {
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .certifications {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .cert-badge {
+            background: var(--secondary-color);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 0.9em;
+            transition: background 0.3s, transform 0.3s;
+            cursor: default;
+        }
+
+        .cert-badge:hover {
+            background: var(--primary-color);
+            transform: scale(1.05);
+        }
+
+        .cert-badge.in-progress {
+            background: var(--accent-color);
+        }
+
+        .education {
+            font-size: 1.1em;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+        }
+
+        .education strong {
+            color: var(--primary-color);
+            font-size: 1.2em;
+        }
+
+        .education .university {
+            color: var(--secondary-color);
+            font-style: italic;
+            margin-left: 10px;
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+
+            .container {
+                box-shadow: none;
+                border-radius: 0;
+            }
+
+            .nav {
+                display: none;
+            }
+
+            .section {
+                opacity: 1;
+                transform: none;
+                page-break-inside: avoid;
+            }
+
+            .header {
+                background: white;
+                color: var(--text-color);
+            }
+
+            .header h1 {
+                color: var(--primary-color);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+
+            .header .title {
+                font-size: 1.2em;
+            }
+
+            .section {
+                padding: 25px 20px;
+            }
+
+            .experience-header {
+                flex-direction: column;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--secondary-color);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.3s, transform 0.3s;
+            z-index: 1000;
+            font-size: 24px;
+        }
+
+        .scroll-top.visible {
+            opacity: 1;
+        }
+
+        .scroll-top:hover {
+            transform: scale(1.1);
         }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-800">
-    <!-- Chosen Palette: Tailwind Grays + Blue Accent -->
-    <!-- Application Structure Plan: Skills-first layout. Header, Skills, Experience, Projects. Core interaction is filtering: clicking a skill tag now highlights individual experience bullets and project cards, providing granular proof without fading. -->
-    <!-- Visualization & Content Choices: Resume Info -> Skills list. Goal -> Allow user to explore competencies. Viz -> Interactive "tags". Interaction -> Click. Justfication -> Intuitive filtering model. Resume Info -> Job bullets. Goal -> Show granular evidence for skills. Viz -> List items. Interaction -> Add/Remove highlight class (JS). Justification -> This is a superior UX, as it keeps all job context visible and pinpoints relevance. -->
-    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
-
-    <div class="max-w-6xl mx-auto p-4 md:p-6 lg:p-10"> <!-- Reduced container padding -->
-        
-        <!-- Header -->
-        <header class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 md:mb-6"> <!-- Reduced margin-bottom -->
-            <div>
-                <h1 class="text-4xl lg:text-5xl font-bold text-gray-900">Kev Zhang</h1>
-                <h2 class="text-xl lg:text-2xl font-medium text-blue-600 mt-1">Solutions Engineer / Senior Solutions Consultant</h2>
-                <div class="mt-4 flex flex-wrap gap-x-6 gap-y-2 text-gray-600">
-                    <span>519-721-7627</span>
-                    <span>|</span>
-                    <span>kevzhg@gmail.com</span>
-                    <span>|</span>
-                    <span>Waterloo, ON</span>
-                </div>
+<body>
+    <div class="container">
+        <nav class="nav">
+            <div class="nav-links">
+                <a href="#summary">Summary</a>
+                <a href="#skills">Skills</a>
+                <a href="#experience">Experience</a>
+                <a href="#projects">Projects</a>
+                <a href="#certifications">Certifications</a>
+                <a href="#education">Education</a>
             </div>
-            <button id="download-btn" class="mt-6 md:mt-0 bg-blue-600 text-white font-medium py-2 px-5 rounded-lg shadow-sm hover:bg-blue-700 transition-all duration-200">
-                Download Resume (MD)
-            </button>
+            <button class="print-btn" onclick="window.print()">Print / Export PDF</button>
+        </nav>
+
+        <header class="header">
+            <h1>KEV ZHANG</h1>
+            <div class="title">Senior Solutions Engineer</div>
+            <div class="contact-info">
+                <span>📱 <a href="tel:519-721-7627">519-721-7627</a></span>
+                <span>✉️ <a href="mailto:kevzhg@gmail.com">kevzhg@gmail.com</a></span>
+                <span>📍 Waterloo, ON</span>
+            </div>
         </header>
 
-        <!-- Skills Section -->
-        <section id="skills" class="mb-0 md:mb-0">
-            <h3 class="text-2xl font-bold text-gray-900">Technical Skills & Competencies</h3>
-            
-            <div class="mb-5"> <!-- Reduced margin-bottom -->
-                <p class="text-gray-600 font-medium mb-3">Interact with my skills. Click a skill to filter my experience.</p>
-                <div id="skills-container" class="flex flex-wrap gap-2">
-                    <!-- Skills will be dynamically injected here -->
+        <section id="summary" class="section">
+            <h2>Professional Summary</h2>
+            <div class="summary">
+                Senior Solutions Engineer with 6+ years of experience leading strategic technical engagements with enterprise clients, building scalable data architectures, and delivering end-to-end analytics solutions. Expert in Python, SQL, and modern data platforms (Databricks, Snowflake, AWS), with deep experience extracting, transforming, and analyzing complex client data to optimize business performance. Proven track record collaborating with cross-functional teams (Product, Engineering, Customer Success) to deliver high-quality, actionable datasets and user-facing data products. Strong customer empathy combined with technical depth in data pipelines, system integration, and sales performance optimization.
+            </div>
+        </section>
+
+        <section id="skills" class="section">
+            <h2>Technical Skills & Competencies</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <strong>Programming & Data:</strong>
+                    Python (PySpark), SQL, JavaScript, TypeScript, Java, Apex (Salesforce)
+                </div>
+                <div class="skill-category">
+                    <strong>Data Platforms & Architecture:</strong>
+                    Databricks, Snowflake, Data Lakehouse Architecture, ETL/ELT Pipelines, Data Warehousing, Business Intelligence (BI)
+                </div>
+                <div class="skill-category">
+                    <strong>Cloud & Infrastructure:</strong>
+                    AWS (Lambda, S3, EC2), Azure, GCP, Microservices Architecture, CI/CD, Docker, Git
+                </div>
+                <div class="skill-category">
+                    <strong>Enterprise Platforms:</strong>
+                    Salesforce (Sales Cloud, Service Cloud, Experience Cloud, OmniStudio), REST APIs, Financial Data Sources, CRM Integration
+                </div>
+                <div class="skill-category">
+                    <strong>Core Competencies:</strong>
+                    Analytics Engineering, Solutions Engineering, Data Architecture, System Integration, Technical Discovery & Demos, POC/POV Development, Solution Architecture, Cross-Functional Collaboration, Technical Presentations, Stakeholder Management
+                </div>
+                <div class="skill-category">
+                    <strong>Emerging Technologies:</strong>
+                    Machine Learning, AI/ML Implementation, Large Language Models (LLMs), Transformer Architecture
                 </div>
             </div>
         </section>
 
-        <!-- Experience Section -->
-        <section id="experience" class="mb-0 md:mb-0">
-            <h3 class="text-2xl font-bold text-gray-900">Professional Experience</h3>
-            
-            <div id="experience-container" class="space-y-6"> <!-- Reduced space-y -->
-                <!-- Experience items will be dynamically injected here -->
+        <section id="experience" class="section">
+            <h2>Professional Experience</h2>
+
+            <div class="experience-item">
+                <div class="experience-header">
+                    <div class="job-title">Senior Application Specialist / Solutions Consultant</div>
+                    <div class="job-date">Feb 2023 – Present</div>
+                </div>
+                <div class="company-name">ThinkLP</div>
+                <ul>
+                    <li>Lead strategic technical engagements with enterprise clients to solve complex business challenges, designing and implementing scalable data architectures and analytics solutions that optimize sales performance and incentive compensation workflows.</li>
+                    <li>Build and optimize data pipelines using Python and SQL to extract, transform, and analyze client data from diverse sources (Salesforce, ServiceNow, HR systems, financial platforms), delivering high-quality, actionable datasets for business intelligence.</li>
+                    <li>Architect end-to-end data integration solutions for Fortune 100 clients, unifying siloed data across multiple enterprise systems into centralized data warehouses—enabling cross-functional teams to access reliable, performant analytics infrastructure.</li>
+                    <li>Collaborate with Product, Engineering, and Customer Success teams to scope requirements, manage competing priorities, and deliver user-facing data products that drive measurable business impact—including $100k+ contract expansion.</li>
+                    <li>Deliver critical data infrastructure implementations in compressed timelines (sub-2-week turnarounds), demonstrating agility while maintaining data quality and performance standards. Mentor junior team members on data engineering best practices.</li>
+                </ul>
+            </div>
+
+            <div class="experience-item">
+                <div class="experience-header">
+                    <div class="job-title">Salesforce Analytics Consultant / Business Analyst</div>
+                    <div class="job-date">Mar 2021 – Jan 2023</div>
+                </div>
+                <div class="company-name">Revolent / Zensar</div>
+                <ul>
+                    <li>Led analytics and implementation consulting, extracting and analyzing Salesforce data to design data-driven solutions that increased customer conversion rates by 20%.</li>
+                    <li>Built custom data integrations and analytics workflows using SQL, REST APIs, and Salesforce reporting tools to transform client data into actionable insights for sales performance optimization.</li>
+                    <li>Conducted technical discovery sessions, designed scalable Salesforce data architectures, and delivered user-facing analytics dashboards enabling data-driven decision-making.</li>
+                </ul>
+            </div>
+
+            <div class="experience-item">
+                <div class="experience-header">
+                    <div class="job-title">Software Engineer / Data Engineer</div>
+                    <div class="job-date">Feb 2019 – Feb 2021</div>
+                </div>
+                <div class="company-name">PointClickCare</div>
+                <ul>
+                    <li>Developed full-stack data pipelines and analytics features for enterprise healthcare SaaS platform serving 27,000+ facilities, using Python, SQL, TypeScript, and Node.js within cloud-based microservices architecture—building scalable data infrastructure for large-scale analytics workloads.</li>
+                    <li>Optimized CI/CD pipelines and data infrastructure on AWS, achieving 95% reliability through comprehensive testing and performance tuning—gaining deep hands-on experience with cloud platforms, data architecture, and building reliable, cost-efficient data systems.</li>
+                </ul>
             </div>
         </section>
 
-        <!-- Projects Section -->
-        <section id="projects" class="pb-0 mb-0">
-            <h3 class="text-2xl font-bold text-gray-900">Projects</h3>
-            
-            <div id="projects-container" class="space-y-6"> <!-- Reduced space-y -->
-                <!-- Project items will be dynamically injected here -->
+        <section id="projects" class="section">
+            <h2>Technical Projects & Continuous Learning</h2>
+
+            <div class="project-item">
+                <div class="project-title">Machine Learning & Analytics Engineering</div>
+                <div>Continuous learning in ML/AI implementation for next-generation analytics. Completed comprehensive course on LLMs, transformer architecture, and fine-tuning—building expertise for AI-powered data products.</div>
+            </div>
+
+            <div class="project-item">
+                <div class="project-title">Serverless Data Architecture</div>
+                <div>Built serverless data processing solution using Python and AWS Lambda for scalable ETL capabilities—deepening expertise in cloud-native data architecture and performant data pipelines.</div>
             </div>
         </section>
 
+        <section id="certifications" class="section">
+            <h2>Certifications</h2>
+            <div class="certifications">
+                <span class="cert-badge">Salesforce Certified Administrator</span>
+                <span class="cert-badge">Salesforce Certified Platform Developer I</span>
+                <span class="cert-badge">Salesforce Certified Experience Cloud Consultant</span>
+                <span class="cert-badge">Salesforce Certified OmniStudio Consultant</span>
+                <span class="cert-badge in-progress">Salesforce Certified System Architect (In Progress)</span>
+            </div>
+        </section>
+
+        <section id="education" class="section">
+            <h2>Education</h2>
+            <div class="education">
+                <strong>Bachelor of Applied Science, Electrical & Computer Engineering</strong>
+                <span class="university">University of Waterloo</span>
+            </div>
+        </section>
     </div>
 
+    <div class="scroll-top" onclick="scrollToTop()">↑</div>
+
     <script>
-        // Updated and condensed skills list for the buttons
-        const skills = [
-            'Solutions Engineering',
-            'Solution Selling',
-            'Technical Discovery & Demos',
-            'POC / POV Delivery',
-            'RFI / RFP Response',
-            'Value-Driven Solutioning',
-            'Stakeholder Management',
-            'API & Data Integration',
-            'Process Automation & Analytics',
-            'Custom Application Development',
-            'AI / ML (LLMs)',
-            'Engineering Mindset'
-        ];
-
-        const experiences = [
-            {
-                role: 'Senior Application Specialist / Solutions Consultant',
-                company: 'ThinkLP',
-                date: 'Feb 2023 – Present',
-                bullets: [
-                    { text: 'Owned the technical/solutions portion of complex B2B sales cycles, acting as an embedded partner to sales and clients to deconstruct problems, prove business value, and secure the technical win.', tags: ['Solutions Engineering', 'Solution Selling', 'Value-Driven Solutioning', 'Engineering Mindset'] },
-                    { text: 'Concurrently managed multiple presales engagements and post-sales application development projects, setting and managing stakeholder expectations, defining technical timelines, and re-prioritizing discovery, demos, and builds to meet competing deal and project deadlines.', tags: ['Stakeholder Management', 'Solutions Engineering', 'Custom Application Development', 'POC / POV Delivery', 'Solution Selling', 'Engineering Mindset'] },
-                    { text: 'Scoped, built, and delivered high-fidelity custom demos and POVs using client data, providing clear, decisive insights into a credible path for simplifying their complex workflows.', tags: ['POC / POV Delivery', 'Technical Discovery & Demos', 'Process Automation & Analytics', 'Engineering Mindset'] },
-                    { text: 'Identified a $100k+ renewal opportunity by using proactive discovery to find an unstated, high-value need; architected and demoed a new solution that captured this value, leading to a major renewal.', tags: ['Technical Discovery & Demos', 'Value-Driven Solutioning', 'Solution Selling', 'Engineering Mindset'] },
-                    { text: 'Architected a complex investigations platform for a Fortune 100 apparel client, unifying siloed teams (Brand Protection, Litigation) by integrating a complex web of legacy systems (Salesforce, ServiceNow, HR feeds, Airtable) into a single source of truth.', tags: ['Solutions Engineering', 'API & Data Integration', 'Stakeholder Management', 'Engineering Mindset'] },
-                    { text: 'Proved platform agility by architecting, building, and deploying a critical, last-minute data integration in under two weeks, securing a complex go-live.', tags: ['Custom Application Development', 'API & Data Integration', 'Engineering Mindset'] },
-                    { text: 'Maintained all presales notes, technical collateral, and solution designs in Salesforce and SharePoint to contribute to team-wide best practices.', tags: ['Solutions Engineering', 'RFI / RFP Response'] }
-                ]
-            },
-            {
-                role: 'Salesforce Consultant / Business Analyst',
-                company: 'Revolent / Zensar',
-                date: 'Mar 2021 – Jan 2023',
-                bullets: [
-                    { text: 'Acted as the primary technical partner for clients, deconstructing complex business requirements and translating them into detailed technical solutions for B2C websites.', tags: ['Solutions Engineering', 'Stakeholder Management', 'Engineering Mindset'] },
-                    { text: 'Partnered with sales to provide technical expertise and deliver tailored system demonstrations, focusing on enhancing workflows rather than just migrating them.', tags: ['Solution Selling', 'Technical Discovery & Demos', 'Value-Driven Solutioning'] },
-                    { text: 'Led key client meetings, including requirements sessions, system demonstrations, and user acceptance testing (UAT).', tags: ['Stakeholder Management', 'Process Automation & Analytics'] }
-                ]
-            },
-            {
-                role: 'Software Engineer',
-                company: 'PointClickCare',
-                date: 'Feb 2019 – Feb 2021',
-                bullets: [
-                    { text: 'Developed full-stack features for a microservices-based project, gaining a deep ”engineering mindset” by deconstructing performance issues and optimizing system architecture.', tags: ['Engineering Mindset', 'Custom Application Development'] },
-                    { text: 'Improved CI/CD deployment efficiency and achieved 95% end-to-end test success rates by developing robust integration and E2E tests.', tags: ['Engineering Mindset', 'Process Automation & Analytics'] }
-                ]
-            }
-        ];
-
-        const projects = [
-            {
-                name: 'LLM Course & Implementation',
-                description: "Actively following the comprehensive 'llm-course' (mlabonne/llm-course), implementing and studying the complete lifecycle of Large Language Models. This includes hands-on work with transformer architecture, tokenization, pre-training, and fine-tuning.",
-                tags: ['AI / ML (LLMs)', 'Engineering Mindset']
-            },
-            {
-                name: 'Serverless LLM Fine-Tuning',
-                description: "Developing a project to fine-tune a language model using serverless cloud functions (e.g., AWS Lambda) for scalable, on-demand training. This project involves self-directed study in Python for model scripting, data preparation, and deployment.",
-                tags: ['AI / ML (LLMs)', 'Custom Application Development', 'API & Data Integration', 'Engineering Mindset']
-            }
-        ];
-
-        let selectedSkill = null;
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const skillsContainer = document.getElementById('skills-container');
-            const downloadBtn = document.getElementById('download-btn');
-
-            // 1. Populate Skills
-            skills.forEach(skill => {
-                const tag = document.createElement('button');
-                tag.textContent = skill;
-                tag.className = 'skill-tag bg-white text-blue-600 font-medium py-1 px-3 rounded-full shadow-sm border border-gray-200 cursor-pointer'; // Smaller padding/font
-                tag.onclick = () => toggleSkill(skill);
-                skillsContainer.appendChild(tag);
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('.nav-links a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
             });
-
-            // 2. Populate Experience
-            renderExperience();
-
-            // 3. Populate Projects
-            renderProjects();
-            
-            // 4. Download Button
-            downloadBtn.addEventListener('click', downloadResume);
         });
 
-        function toggleSkill(skill) {
-            if (selectedSkill === skill) {
-                selectedSkill = null;
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Scroll to top button
+        const scrollTopBtn = document.querySelector('.scroll-top');
+
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                scrollTopBtn.classList.add('visible');
             } else {
-                selectedSkill = skill;
+                scrollTopBtn.classList.remove('visible');
             }
-            updateSkillTags();
-            filterItems();
+        });
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        function updateSkillTags() {
-            document.querySelectorAll('.skill-tag').forEach(tag => {
-                if (tag.textContent === selectedSkill) {
-                    tag.classList.add('selected');
-                } else {
-                    tag.classList.remove('selected');
-                }
+        // Add ripple effect to project items
+        document.querySelectorAll('.project-item').forEach(item => {
+            item.addEventListener('click', function(e) {
+                const ripple = document.createElement('div');
+                ripple.style.position = 'absolute';
+                ripple.style.borderRadius = '50%';
+                ripple.style.background = 'rgba(52, 152, 219, 0.3)';
+                ripple.style.width = ripple.style.height = '100px';
+                ripple.style.left = e.clientX - this.offsetLeft - 50 + 'px';
+                ripple.style.top = e.clientY - this.offsetTop - 50 + 'px';
+                ripple.style.animation = 'ripple 0.6s ease-out';
+                this.appendChild(ripple);
+                setTimeout(() => ripple.remove(), 600);
             });
-        }
-
-        function filterItems() {
-            // Filter Experience Bullets
-            document.querySelectorAll('.experience-bullet').forEach(bullet => {
-                const itemSkills = JSON.parse(bullet.dataset.tags);
-                if (!selectedSkill) {
-                    bullet.classList.remove('bullet-highlight'); // Remove highlight if no skill selected
-                } else if (itemSkills.includes(selectedSkill)) {
-                    bullet.classList.add('bullet-highlight'); // Add highlight
-                } else {
-                    bullet.classList.remove('bullet-highlight'); // Remove highlight
-                }
-            });
-
-            // Filter Projects (now highlights card, doesn't fade)
-            document.querySelectorAll('.project-item').forEach(item => {
-                const itemSkills = JSON.parse(item.dataset.skills);
-                if (!selectedSkill) {
-                    item.classList.remove('project-highlight'); // Remove highlight
-                } else if (itemSkills.includes(selectedSkill)) {
-                    item.classList.add('project-highlight'); // Add highlight
-                } else {
-                    item.classList.remove('project-highlight'); // Remove highlight
-                }
-            });
-            
-            // Highlight Projects Section for AI/ML
-            const projectsSection = document.getElementById('projects');
-            if (selectedSkill === 'AI / ML (LLMs)') {
-                projectsSection.classList.add('section-highlight');
-            } else {
-                projectsSection.classList.remove('section-highlight');
-            }
-        }
-        
-        function renderExperience() {
-            const container = document.getElementById('experience-container');
-            container.innerHTML = '';
-            experiences.forEach(exp => {
-                const item = document.createElement('div');
-                // Keep the experience-item class for general styling
-                item.className = 'experience-item bg-white p-5 rounded-lg shadow-sm border border-gray-200'; // Reduced padding
-                
-                item.innerHTML = `
-                    <div class="flex flex-col sm:flex-row justify-between sm:items-center mb-2">
-                        <h4 class="text-xl font-bold text-gray-900">${exp.role}</h4>
-                        <span class="font-medium text-gray-500 text-sm sm:text-base">${exp.date}</span>
-                    </div>
-                    <p class="font-semibold text-blue-600 text-lg mb-3">${exp.company}</p>
-                    <ul class="list-disc list-outside pl-5 space-y-2 text-gray-700">
-                        ${exp.bullets.map(bullet => `
-                            <li class="experience-bullet" data-tags='${JSON.stringify(bullet.tags)}'>
-                                ${bullet.text}
-                            </li>
-                        `).join('')}
-                    </ul>
-                `;
-                container.appendChild(item);
-            });
-        }
-
-        function renderProjects() {
-            const container = document.getElementById('projects-container');
-            container.innerHTML = '';
-            projects.forEach(proj => {
-                const item = document.createElement('div');
-                item.className = 'project-item bg-white p-5 rounded-lg shadow-sm border border-gray-200'; // Reduced padding
-                item.dataset.skills = JSON.stringify(proj.tags);
-
-                item.innerHTML = `
-                    <h4 class="text-xl font-bold text-gray-900 mb-1">${proj.name}</h4>
-                    <p class="text-gray-700">${proj.description}</p>
-                `;
-                container.appendChild(item);
-            });
-        }
-        
-        function downloadResume() {
-            const resumeContent = `
-# KEV ZHANG
-**Solutions Engineer / Senior Solutions Consultant**
-519-721-7627  |  kevzhg@gmail.com  |  Waterloo, ON
-
-### PROFESSIONAL SUMMARY
-A hands-on, consultative Solutions Engineer skilled at bridging the gap between complex business needs and powerful technical solutions. I partner with enterprise clients to lead deep-dive discovery, design customized solutions, and deliver compelling product demonstrations to secure technical and commercial wins. My focus is on articulating tangible business value and rapidly building the custom solutions that prove it.
-
-### TECHNICAL SKILLS & COMPETENCIES
-**Core Competencies:** Solutions Engineering, Solution Selling, Technical Discovery & Demos, POC & POV Scoping and Delivery, RFI/RFP Response, Value-Driven Solutioning
-**Technical Skills:** API Integration, Data Migration, Process Automation, Business Analytics, Custom Application Development
-**AI / ML Familiarity:** Actively implementing and studying the complete lifecycle of Large Language Models (transformer architecture, pre-training, and fine-tuning).
-
-### PROFESSIONAL EXPERIENCE
-**Senior Application Specialist / Solutions Consultant** | **ThinkLP** | **Feb 2023 – Present**
-* Owned the technical/solutions portion of complex B2B sales cycles, acting as an embedded partner to sales and clients to deconstruct problems, prove business value, and secure the technical win.
-* Concurrently managed multiple presales engagements and post-sales application development projects, setting and managing stakeholder expectations, defining technical timelines, and re-prioritizing discovery, demos, and builds to meet competing deal and project deadlines.
-* Scoped, built, and delivered high-fidelity custom demos and POVs using client data, providing clear, decisive insights into a credible path for simplifying their complex workflows.
-* Identified a $100k+ renewal opportunity by using proactive discovery to find an unstated, high-value need; architected and demoed a new solution that captured this value, leading to a major renewal.
-* Architected a complex investigations platform for a Fortune 100 apparel client, unifying siloed teams (Brand Protection, Litigation) by integrating a complex web of legacy systems (Salesforce, ServiceNow, HR feeds, Airtable) into a single source of truth.
-* Proved platform agility by architecting, building, and deploying a critical, last-minute data integration in under two weeks, securing a complex go-live.
-* Maintained all presales notes, technical collateral, and solution designs in Salesforce and SharePoint to contribute to team-wide best practices.
-
-**Salesforce Consultant / Business Analyst** | **Revolent / Zensar** | **Mar 2021 – Jan 2023**
-* Acted as the primary technical partner for clients, deconstructing complex business requirements and translating them into detailed technical solutions for B2C websites.
-* Partnered with sales to provide technical expertise and deliver tailored system demonstrations, focusing on enhancing workflows rather than just migrating them.
-* Led key client meetings, including requirements sessions, system demonstrations, and user acceptance testing (UAT).
-
-**Software Engineer** | **PointClickCare** | **Feb 2019 – Feb 2021**
-* Developed full-stack features for a microservices-based project, gaining a deep ”engineering mindset” by deconstructing performance issues and optimizing system architecture.
-* Improved CI/CD deployment efficiency and achieved 95% end-to-end test success rates by developing robust integration and E2E tests.
-
-### PROJECTS
-**LLM Course & Implementation**
-Actively following the comprehensive 'llm-course' (mlabonne/llm-course), implementing and studying the complete lifecycle of Large Language Models. This includes hands-on work with transformer architecture, tokenization, pre-training, and fine-tuning.
-
-**Serverless LLM Fine-Tuning**
-Developing a project to fine-tune a language model using serverless cloud functions (e.g., AWS Lambda) for scalable, on-demand training. This project involves self-directed study in Python for model scripting, data preparation, and deployment.
-
-### EDUCATION
-**Bachelor of Applied Science, Electrical & Computer Engineering** | **University of Waterloo**
-`;
-            
-            const blob = new Blob([resumeContent.trim()], { type: 'text/markdown' });
-            const link = document.createElement('a');
-            link.href = URL.createObjectURL(blob);
-            link.download = 'Kev_Zhang_Resume.md';
-            
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-        }
-
+        });
     </script>
 </body>
 </html>
