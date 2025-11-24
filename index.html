@@ -3,46 +3,209 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kev Zhang - Senior Solutions Engineer</title>
+    <title>Kev Zhang | Solutions Engineer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #64748b;
+            --accent: #10b981;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --card-bg: #ffffff;
+            --text: #334155;
+            --text-light: #64748b;
+            --border: #e2e8f0;
+            --gradient: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        :root {
-            --primary-color: #2c3e50;
-            --secondary-color: #3498db;
-            --accent-color: #e74c3c;
-            --text-color: #333;
-            --light-bg: #f8f9fa;
-            --border-color: #e1e8ed;
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', sans-serif;
+            background: var(--light);
+            color: var(--text);
             line-height: 1.6;
-            color: var(--text-color);
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 15px 0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.5rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
             min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0.1;
+        }
+
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, var(--primary) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: float 20s linear infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 1;
             padding: 20px;
         }
 
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            overflow: hidden;
-            animation: fadeIn 0.6s ease-in;
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            animation: fadeInUp 0.8s ease;
         }
 
-        @keyframes fadeIn {
+        .hero .subtitle {
+            font-size: 1.5rem;
+            color: #94a3b8;
+            margin-bottom: 20px;
+            animation: fadeInUp 0.8s ease 0.2s both;
+        }
+
+        .typing-text {
+            font-size: 1.2rem;
+            color: var(--accent);
+            height: 30px;
+            animation: fadeInUp 0.8s ease 0.4s both;
+        }
+
+        .hero-cta {
+            margin-top: 40px;
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            animation: fadeInUp 0.8s ease 0.6s both;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: var(--gradient);
+            color: white;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+
+        .btn-secondary:hover {
+            border-color: white;
+            background: rgba(255,255,255,0.1);
+        }
+
+        @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(20px);
+                transform: translateY(30px);
             }
             to {
                 opacity: 1;
@@ -50,556 +213,843 @@
             }
         }
 
-        .nav {
-            background: var(--primary-color);
-            padding: 15px 30px;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
+        /* Sections */
+        section {
+            padding: 100px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
-        .nav-links {
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            font-size: 14px;
-            transition: color 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: var(--secondary-color);
-        }
-
-        .print-btn {
-            background: var(--secondary-color);
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 14px;
-            transition: background 0.3s;
-        }
-
-        .print-btn:hover {
-            background: #2980b9;
-        }
-
-        .header {
-            background: linear-gradient(135deg, var(--primary-color) 0%, #34495e 100%);
-            color: white;
-            padding: 50px 40px;
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
             text-align: center;
+            margin-bottom: 60px;
+            position: relative;
         }
 
-        .header h1 {
-            font-size: 3em;
-            margin-bottom: 10px;
-            letter-spacing: 2px;
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: var(--gradient);
+            border-radius: 2px;
         }
 
-        .header .title {
-            font-size: 1.5em;
-            color: var(--secondary-color);
-            margin-bottom: 20px;
-        }
-
-        .contact-info {
-            display: flex;
-            justify-content: center;
+        /* Stats Section */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
             gap: 30px;
-            flex-wrap: wrap;
-            margin-top: 20px;
+            margin-bottom: 80px;
         }
 
-        .contact-info a {
-            color: white;
-            text-decoration: none;
-            transition: color 0.3s;
+        .stat-card {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
         }
 
-        .contact-info a:hover {
-            color: var(--secondary-color);
+        .stat-card:hover {
+            transform: translateY(-5px);
         }
 
-        .section {
-            padding: 40px;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s, transform 0.6s;
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        .section.visible {
-            opacity: 1;
-            transform: translateY(0);
+        .stat-label {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-top: 5px;
         }
 
-        .section:nth-child(even) {
-            background: var(--light-bg);
-        }
-
-        .section h2 {
-            color: var(--primary-color);
-            border-bottom: 3px solid var(--secondary-color);
-            padding-bottom: 10px;
-            margin-bottom: 25px;
-            font-size: 1.8em;
-            display: inline-block;
-        }
-
-        .summary {
-            font-size: 1.05em;
-            line-height: 1.8;
-            text-align: justify;
-        }
-
+        /* Skills Section */
         .skills-grid {
             display: grid;
-            gap: 20px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
         }
 
         .skill-category {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
-            transition: transform 0.3s, box-shadow 0.3s;
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            transition: all 0.3s;
         }
 
         .skill-category:hover {
             transform: translateY(-5px);
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
         }
 
-        .skill-category strong {
-            color: var(--secondary-color);
-            font-size: 1.1em;
-            display: block;
-            margin-bottom: 10px;
-        }
-
-        .experience-item {
-            margin-bottom: 35px;
-            padding: 25px;
-            background: white;
-            border-radius: 8px;
-            border-left: 4px solid var(--secondary-color);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .experience-item:hover {
-            transform: translateX(5px);
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .experience-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 10px;
-            flex-wrap: wrap;
-        }
-
-        .job-title {
-            font-size: 1.3em;
-            font-weight: bold;
-            color: var(--primary-color);
-        }
-
-        .job-date {
-            color: #666;
-            font-style: italic;
-            font-size: 0.95em;
-        }
-
-        .company-name {
-            color: var(--secondary-color);
-            font-size: 1.1em;
-            margin-bottom: 15px;
-            font-style: italic;
-        }
-
-        .experience-item ul {
-            list-style: none;
-            padding-left: 0;
-        }
-
-        .experience-item li {
-            padding: 10px 0 10px 30px;
-            position: relative;
-            line-height: 1.7;
-            transition: background 0.3s;
-        }
-
-        .experience-item li:hover {
-            background: var(--light-bg);
-            border-radius: 5px;
-        }
-
-        .experience-item li::before {
-            content: "▸";
-            position: absolute;
-            left: 10px;
-            color: var(--secondary-color);
-            font-weight: bold;
-        }
-
-        .project-item {
+        .skill-category h3 {
+            font-size: 1.2rem;
             margin-bottom: 20px;
-            padding: 20px;
-            background: white;
-            border-radius: 8px;
-            border-left: 4px solid var(--accent-color);
-            cursor: pointer;
-            transition: all 0.3s;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        .project-item:hover {
-            transform: translateX(5px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .project-title {
-            font-weight: bold;
-            color: var(--primary-color);
-            margin-bottom: 10px;
-            font-size: 1.1em;
-        }
-
-        .certifications {
+        .skill-tags {
             display: flex;
             flex-wrap: wrap;
-            gap: 15px;
+            gap: 10px;
         }
 
-        .cert-badge {
-            background: var(--secondary-color);
-            color: white;
-            padding: 10px 20px;
-            border-radius: 25px;
-            font-size: 0.9em;
-            transition: background 0.3s, transform 0.3s;
+        .skill-tag {
+            background: var(--light);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: var(--text);
+            transition: all 0.3s;
             cursor: default;
         }
 
-        .cert-badge:hover {
-            background: var(--primary-color);
+        .skill-tag:hover {
+            background: var(--primary);
+            color: white;
             transform: scale(1.05);
         }
 
-        .cert-badge.in-progress {
-            background: var(--accent-color);
+        /* Experience Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 40px;
         }
 
-        .education {
-            font-size: 1.1em;
-            padding: 20px;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--border);
         }
 
-        .education strong {
-            color: var(--primary-color);
-            font-size: 1.2em;
+        .timeline-item {
+            position: relative;
+            margin-bottom: 50px;
+            padding: 30px;
+            background: var(--card-bg);
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            transition: all 0.3s;
+            cursor: pointer;
         }
 
-        .education .university {
-            color: var(--secondary-color);
-            font-style: italic;
-            margin-left: 10px;
+        .timeline-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
         }
 
-        @media print {
-            body {
-                background: white;
-                padding: 0;
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -46px;
+            top: 35px;
+            width: 14px;
+            height: 14px;
+            background: var(--primary);
+            border-radius: 50%;
+            border: 3px solid var(--light);
+        }
+
+        .timeline-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .timeline-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .timeline-company {
+            color: var(--primary);
+            font-weight: 500;
+        }
+
+        .timeline-date {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            background: var(--light);
+            padding: 5px 12px;
+            border-radius: 20px;
+        }
+
+        .timeline-bullets {
+            list-style: none;
+            margin-top: 20px;
+        }
+
+        .timeline-bullets li {
+            padding: 10px 0;
+            padding-left: 25px;
+            position: relative;
+            color: var(--text);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .timeline-bullets li:last-child {
+            border-bottom: none;
+        }
+
+        .timeline-bullets li::before {
+            content: '>';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        .expand-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            color: var(--primary);
+            font-weight: 500;
+            margin-top: 15px;
+            cursor: pointer;
+            transition: gap 0.3s;
+        }
+
+        .expand-btn:hover {
+            gap: 10px;
+        }
+
+        .hidden-bullets {
+            display: none;
+        }
+
+        .timeline-item.expanded .hidden-bullets {
+            display: block;
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            transition: all 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        .project-header {
+            background: var(--gradient);
+            padding: 30px;
+            color: white;
+        }
+
+        .project-header h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .project-body {
+            padding: 30px;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 15px;
+        }
+
+        .project-tech span {
+            background: var(--light);
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            color: var(--text-light);
+        }
+
+        /* Contact Section */
+        #contact {
+            background: var(--dark);
+            color: white;
+            max-width: none;
+            text-align: center;
+        }
+
+        #contact .section-title {
+            color: white;
+        }
+
+        .contact-grid {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 20px 30px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 12px;
+            transition: all 0.3s;
+            text-decoration: none;
+            color: white;
+        }
+
+        .contact-item:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-3px);
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: var(--text-light);
+            text-align: center;
+            padding: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /* Scroll Animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text);
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
             }
 
-            .container {
-                box-shadow: none;
-                border-radius: 0;
+            .skills-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
 
-            .nav {
-                display: none;
+            .projects-grid {
+                grid-template-columns: 1fr;
             }
 
-            .section {
-                opacity: 1;
-                transform: none;
-                page-break-inside: avoid;
-            }
-
-            .header {
-                background: white;
-                color: var(--text-color);
-            }
-
-            .header h1 {
-                color: var(--primary-color);
+            .hero h1 {
+                font-size: 2.5rem;
             }
         }
 
         @media (max-width: 768px) {
-            .header h1 {
-                font-size: 2em;
+            .nav-links {
+                display: none;
             }
 
-            .header .title {
-                font-size: 1.2em;
+            .mobile-menu-btn {
+                display: block;
             }
 
-            .section {
-                padding: 25px 20px;
+            .stats {
+                grid-template-columns: 1fr;
             }
 
-            .experience-header {
-                flex-direction: column;
+            .skills-grid {
+                grid-template-columns: 1fr;
             }
 
-            .contact-info {
+            .timeline {
+                padding-left: 20px;
+            }
+
+            .timeline-header {
                 flex-direction: column;
                 gap: 10px;
             }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero .subtitle {
+                font-size: 1.2rem;
+            }
         }
 
+        /* Scroll to top button */
         .scroll-top {
             position: fixed;
             bottom: 30px;
             right: 30px;
-            background: var(--secondary-color);
-            color: white;
             width: 50px;
             height: 50px;
+            background: var(--gradient);
+            color: white;
+            border: none;
             border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             cursor: pointer;
             opacity: 0;
-            transition: opacity 0.3s, transform 0.3s;
+            visibility: hidden;
+            transition: all 0.3s;
+            font-size: 1.2rem;
             z-index: 1000;
-            font-size: 24px;
         }
 
         .scroll-top.visible {
             opacity: 1;
+            visibility: visible;
         }
 
         .scroll-top:hover {
-            transform: scale(1.1);
+            transform: translateY(-5px);
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <nav class="nav">
-            <div class="nav-links">
-                <a href="#summary">Summary</a>
-                <a href="#skills">Skills</a>
-                <a href="#experience">Experience</a>
-                <a href="#projects">Projects</a>
-                <a href="#certifications">Certifications</a>
-                <a href="#education">Education</a>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">KZ</div>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button class="mobile-menu-btn">☰</button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <h1>Kev Zhang</h1>
+            <p class="subtitle">Solutions Engineer</p>
+            <div class="typing-text" id="typing"></div>
+            <div class="hero-cta">
+                <a href="#contact" class="btn btn-primary">Get in Touch</a>
+                <a href="#experience" class="btn btn-secondary">View Experience</a>
             </div>
-        </nav>
+        </div>
+    </section>
 
-        <header class="header">
-            <h1>KEV ZHANG</h1>
-            <div class="title">Senior Solutions Engineer</div>
-            <div class="contact-info">
-                <span>📱 <a href="tel:519-721-7627">519-721-7627</a></span>
-                <span>✉️ <a href="mailto:kevzhg@gmail.com">kevzhg@gmail.com</a></span>
-                <span>📍 Waterloo, ON</span>
+    <!-- Stats Section -->
+    <section id="about">
+        <h2 class="section-title">By the Numbers</h2>
+        <div class="stats">
+            <div class="stat-card reveal">
+                <div class="stat-number" data-target="6">0</div>
+                <div class="stat-label">Years Experience</div>
             </div>
-        </header>
-
-        <section id="summary" class="section">
-            <h2>Professional Summary</h2>
-            <div class="summary">
-                Senior Solutions Engineer with 6+ years of experience leading strategic technical engagements with enterprise clients, building scalable data architectures, and delivering end-to-end analytics solutions. Expert in Python, SQL, and modern data platforms (Databricks, Snowflake, AWS), with deep experience extracting, transforming, and analyzing complex client data to optimize business performance. Proven track record collaborating with cross-functional teams (Product, Engineering, Customer Success) to deliver high-quality, actionable datasets and user-facing data products. Strong customer empathy combined with technical depth in data pipelines, system integration, and sales performance optimization.
+            <div class="stat-card reveal">
+                <div class="stat-number" data-target="100" data-suffix="k+">0</div>
+                <div class="stat-label">Contract Renewal Secured</div>
             </div>
-        </section>
+            <div class="stat-card reveal">
+                <div class="stat-number" data-target="40" data-suffix="%">0</div>
+                <div class="stat-label">Coordination Time Reduced</div>
+            </div>
+            <div class="stat-card reveal">
+                <div class="stat-number" data-target="5" data-suffix="+">0</div>
+                <div class="stat-label">Fortune 500 Clients</div>
+            </div>
+        </div>
 
-        <section id="skills" class="section">
-            <h2>Technical Skills & Competencies</h2>
-            <div class="skills-grid">
-                <div class="skill-category">
-                    <strong>Programming & Data:</strong>
-                    Python (PySpark), SQL, JavaScript, TypeScript, Java, Apex (Salesforce)
-                </div>
-                <div class="skill-category">
-                    <strong>Data Platforms & Architecture:</strong>
-                    Databricks, Snowflake, Data Lakehouse Architecture, ETL/ELT Pipelines, Data Warehousing, Business Intelligence (BI)
-                </div>
-                <div class="skill-category">
-                    <strong>Cloud & Infrastructure:</strong>
-                    AWS (Lambda, S3, EC2), Azure, GCP, Microservices Architecture, CI/CD, Docker, Git
-                </div>
-                <div class="skill-category">
-                    <strong>Enterprise Platforms:</strong>
-                    Salesforce (Sales Cloud, Service Cloud, Experience Cloud, OmniStudio), REST APIs, Financial Data Sources, CRM Integration
-                </div>
-                <div class="skill-category">
-                    <strong>Core Competencies:</strong>
-                    Analytics Engineering, Solutions Engineering, Data Architecture, System Integration, Technical Discovery & Demos, POC/POV Development, Solution Architecture, Cross-Functional Collaboration, Technical Presentations, Stakeholder Management
-                </div>
-                <div class="skill-category">
-                    <strong>Emerging Technologies:</strong>
-                    Machine Learning, AI/ML Implementation, Large Language Models (LLMs), Transformer Architecture
+        <div class="about-text reveal" style="max-width: 800px; margin: 0 auto; text-align: center; font-size: 1.1rem; color: var(--text-light);">
+            <p>Solutions Engineer with 6+ years leading technical sales cycles for enterprise clients. I partner with account executives to conduct discovery, deliver custom demos, and build POC/POV solutions that drive technical wins. Proven track record in presales engineering, solution architecture, and post-sales implementation across SaaS platforms.</p>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <h2 class="section-title">Technical Skills</h2>
+        <div class="skills-grid">
+            <div class="skill-category reveal">
+                <h3>🎯 Core Competencies</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">Presales Engineering</span>
+                    <span class="skill-tag">Technical Discovery</span>
+                    <span class="skill-tag">POC/POV Development</span>
+                    <span class="skill-tag">Solution Architecture</span>
+                    <span class="skill-tag">Technical Demos</span>
+                    <span class="skill-tag">Stakeholder Management</span>
                 </div>
             </div>
-        </section>
-
-        <section id="experience" class="section">
-            <h2>Professional Experience</h2>
-
-            <div class="experience-item">
-                <div class="experience-header">
-                    <div class="job-title">Senior Application Specialist / Solutions Consultant</div>
-                    <div class="job-date">Feb 2023 – Present</div>
+            <div class="skill-category reveal">
+                <h3>💻 Programming & Tech</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">JavaScript</span>
+                    <span class="skill-tag">TypeScript</span>
+                    <span class="skill-tag">Java</span>
+                    <span class="skill-tag">SQL</span>
+                    <span class="skill-tag">REST APIs</span>
                 </div>
-                <div class="company-name">ThinkLP</div>
-                <ul>
-                    <li>Lead strategic technical engagements with enterprise clients to solve complex business challenges, designing and implementing scalable data architectures and analytics solutions that optimize sales performance and incentive compensation workflows.</li>
-                    <li>Build and optimize data pipelines using Python and SQL to extract, transform, and analyze client data from diverse sources (Salesforce, ServiceNow, HR systems, financial platforms), delivering high-quality, actionable datasets for business intelligence.</li>
-                    <li>Architect end-to-end data integration solutions for Fortune 100 clients, unifying siloed data across multiple enterprise systems into centralized data warehouses—enabling cross-functional teams to access reliable, performant analytics infrastructure.</li>
-                    <li>Collaborate with Product, Engineering, and Customer Success teams to scope requirements, manage competing priorities, and deliver user-facing data products that drive measurable business impact—including $100k+ contract expansion.</li>
-                    <li>Deliver critical data infrastructure implementations in compressed timelines (sub-2-week turnarounds), demonstrating agility while maintaining data quality and performance standards. Mentor junior team members on data engineering best practices.</li>
+            </div>
+            <div class="skill-category reveal">
+                <h3>☁️ Cloud & Infrastructure</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">AWS</span>
+                    <span class="skill-tag">Azure</span>
+                    <span class="skill-tag">GCP</span>
+                    <span class="skill-tag">CI/CD</span>
+                    <span class="skill-tag">Docker</span>
+                    <span class="skill-tag">Git</span>
+                </div>
+            </div>
+            <div class="skill-category reveal">
+                <h3>🔧 Technical Expertise</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">API Integration</span>
+                    <span class="skill-tag">System Integration</span>
+                    <span class="skill-tag">Data Migration</span>
+                    <span class="skill-tag">Process Automation</span>
+                    <span class="skill-tag">SaaS Solutions</span>
+                </div>
+            </div>
+            <div class="skill-category reveal">
+                <h3>🏢 Enterprise Platforms</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">Salesforce</span>
+                    <span class="skill-tag">ServiceNow</span>
+                    <span class="skill-tag">Airtable</span>
+                    <span class="skill-tag">HR Systems</span>
+                </div>
+            </div>
+            <div class="skill-category reveal">
+                <h3>🤖 Emerging Tech</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">AI/ML</span>
+                    <span class="skill-tag">LLMs</span>
+                    <span class="skill-tag">Serverless</span>
+                    <span class="skill-tag">Microservices</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience">
+        <h2 class="section-title">Experience</h2>
+        <div class="timeline">
+            <div class="timeline-item reveal" onclick="this.classList.toggle('expanded')">
+                <div class="timeline-header">
+                    <div>
+                        <div class="timeline-title">Senior Application Specialist / Solutions Consultant</div>
+                        <div class="timeline-company">ThinkLP</div>
+                    </div>
+                    <span class="timeline-date">Feb 2023 - Present</span>
+                </div>
+                <ul class="timeline-bullets">
+                    <li>Secured $100k+ contract renewal by running proactive discovery sessions with an at-risk client, identifying three unaddressed pain points, and demoing a tailored solution.</li>
+                    <li>Architected a unified integration platform for a Fortune 100 client, connecting Salesforce, ServiceNow, HR systems, and Airtable via REST APIs—reducing cross-team coordination time by 40%.</li>
+                    <li>Delivered a critical data migration two weeks before go-live by writing Python scripts, leading daily standups, and coordinating UAT directly with the client team.</li>
+                    <div class="hidden-bullets">
+                        <li>Built the team's first standardized demo environments and technical documentation in Salesforce CRM, creating a repeatable presales process.</li>
+                        <li>Manage 5+ concurrent presales engagements across discovery calls, POC builds, and demo prep while maintaining quality across all active deals.</li>
+                        <li>Navigate complex enterprise sales cycles by running discovery, building custom demos with actual client data, and presenting ROI analysis to multi-stakeholder buying committees.</li>
+                    </div>
+                </ul>
+                <div class="expand-btn">Show more →</div>
+            </div>
+
+            <div class="timeline-item reveal" onclick="this.classList.toggle('expanded')">
+                <div class="timeline-header">
+                    <div>
+                        <div class="timeline-title">Salesforce Solutions Consultant / Business Analyst</div>
+                        <div class="timeline-company">Revolent / Zensar</div>
+                    </div>
+                    <span class="timeline-date">Mar 2021 - Jan 2023</span>
+                </div>
+                <ul class="timeline-bullets">
+                    <li>Designed Salesforce Sales Cloud solution with automated lead scoring and follow-up workflows for an e-commerce client—increased conversion rates by 20%.</li>
+                    <li>Stepped in to deliver product demonstrations when sales team needed technical support, built custom Salesforce environments showing client-specific workflows.</li>
+                    <div class="hidden-bullets">
+                        <li>Led client-facing sessions to identify blockers during UAT phase, ran solution design reviews, and coordinated fixes with dev team to ensure successful go-lives.</li>
+                    </div>
+                </ul>
+                <div class="expand-btn">Show more →</div>
+            </div>
+
+            <div class="timeline-item reveal">
+                <div class="timeline-header">
+                    <div>
+                        <div class="timeline-title">Software Engineer</div>
+                        <div class="timeline-company">PointClickCare</div>
+                    </div>
+                    <span class="timeline-date">Feb 2019 - Feb 2021</span>
+                </div>
+                <ul class="timeline-bullets">
+                    <li>Developed full-stack features for an enterprise healthcare SaaS platform serving 27,000+ facilities, working across React, TypeScript, Node.js, and Kotlin in a microservices architecture.</li>
+                    <li>Improved E2E test reliability from 70% to 95% by debugging flaky tests and refactoring the CI/CD pipeline, significantly reducing deployment friction.</li>
                 </ul>
             </div>
+        </div>
+    </section>
 
-            <div class="experience-item">
-                <div class="experience-header">
-                    <div class="job-title">Salesforce Analytics Consultant / Business Analyst</div>
-                    <div class="job-date">Mar 2021 – Jan 2023</div>
+    <!-- Projects Section -->
+    <section id="projects">
+        <h2 class="section-title">Projects & Learning</h2>
+        <div class="projects-grid">
+            <div class="project-card reveal">
+                <div class="project-header">
+                    <h3>AI/ML Implementation</h3>
+                    <p>Deep dive into modern AI technologies</p>
                 </div>
-                <div class="company-name">Revolent / Zensar</div>
-                <ul>
-                    <li>Led analytics and implementation consulting, extracting and analyzing Salesforce data to design data-driven solutions that increased customer conversion rates by 20%.</li>
-                    <li>Built custom data integrations and analytics workflows using SQL, REST APIs, and Salesforce reporting tools to transform client data into actionable insights for sales performance optimization.</li>
-                    <li>Conducted technical discovery sessions, designed scalable Salesforce data architectures, and delivered user-facing analytics dashboards enabling data-driven decision-making.</li>
-                </ul>
-            </div>
-
-            <div class="experience-item">
-                <div class="experience-header">
-                    <div class="job-title">Software Engineer / Data Engineer</div>
-                    <div class="job-date">Feb 2019 – Feb 2021</div>
+                <div class="project-body">
+                    <p>Completed comprehensive LLM course covering transformer architecture and fine-tuning, enabling technical discussions with clients exploring AI integrations.</p>
+                    <div class="project-tech">
+                        <span>LLMs</span>
+                        <span>Transformers</span>
+                        <span>Fine-tuning</span>
+                        <span>AI/ML</span>
+                    </div>
                 </div>
-                <div class="company-name">PointClickCare</div>
-                <ul>
-                    <li>Developed full-stack data pipelines and analytics features for enterprise healthcare SaaS platform serving 27,000+ facilities, using Python, SQL, TypeScript, and Node.js within cloud-based microservices architecture—building scalable data infrastructure for large-scale analytics workloads.</li>
-                    <li>Optimized CI/CD pipelines and data infrastructure on AWS, achieving 95% reliability through comprehensive testing and performance tuning—gaining deep hands-on experience with cloud platforms, data architecture, and building reliable, cost-efficient data systems.</li>
-                </ul>
             </div>
-        </section>
-
-        <section id="projects" class="section">
-            <h2>Technical Projects & Continuous Learning</h2>
-
-            <div class="project-item">
-                <div class="project-title">Machine Learning & Analytics Engineering</div>
-                <div>Continuous learning in ML/AI implementation for next-generation analytics. Completed comprehensive course on LLMs, transformer architecture, and fine-tuning—building expertise for AI-powered data products.</div>
+            <div class="project-card reveal">
+                <div class="project-header">
+                    <h3>Serverless Architecture</h3>
+                    <p>Cloud-native solution design</p>
+                </div>
+                <div class="project-body">
+                    <p>Built serverless solution using Python and AWS Lambda, demonstrating cloud-native architecture patterns for scalable, cost-effective deployments.</p>
+                    <div class="project-tech">
+                        <span>Python</span>
+                        <span>AWS Lambda</span>
+                        <span>Serverless</span>
+                        <span>Cloud Architecture</span>
+                    </div>
+                </div>
             </div>
+        </div>
+    </section>
 
-            <div class="project-item">
-                <div class="project-title">Serverless Data Architecture</div>
-                <div>Built serverless data processing solution using Python and AWS Lambda for scalable ETL capabilities—deepening expertise in cloud-native data architecture and performant data pipelines.</div>
+    <!-- Contact Section -->
+    <section id="contact">
+        <h2 class="section-title">Let's Connect</h2>
+        <p style="color: #94a3b8; margin-bottom: 20px;">Interested in working together? Let's talk.</p>
+        <div class="contact-grid">
+            <a href="mailto:kevzhg@gmail.com" class="contact-item">
+                <div class="contact-icon">✉</div>
+                <div>
+                    <div style="font-weight: 600;">Email</div>
+                    <div style="color: #94a3b8;">kevzhg@gmail.com</div>
+                </div>
+            </a>
+            <a href="tel:519-721-7627" class="contact-item">
+                <div class="contact-icon">📱</div>
+                <div>
+                    <div style="font-weight: 600;">Phone</div>
+                    <div style="color: #94a3b8;">519-721-7627</div>
+                </div>
+            </a>
+            <div class="contact-item">
+                <div class="contact-icon">📍</div>
+                <div>
+                    <div style="font-weight: 600;">Location</div>
+                    <div style="color: #94a3b8;">Waterloo, ON</div>
+                </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section id="certifications" class="section">
-            <h2>Certifications</h2>
-            <div class="certifications">
-                <span class="cert-badge">Salesforce Certified Administrator</span>
-                <span class="cert-badge">Salesforce Certified Platform Developer I</span>
-                <span class="cert-badge">Salesforce Certified Experience Cloud Consultant</span>
-                <span class="cert-badge">Salesforce Certified OmniStudio Consultant</span>
-                <span class="cert-badge in-progress">Salesforce Certified System Architect (In Progress)</span>
-            </div>
-        </section>
+    <!-- Footer -->
+    <footer>
+        <p>Bachelor of Applied Science, Electrical & Computer Engineering - University of Waterloo</p>
+        <p style="margin-top: 10px;">© 2024 Kev Zhang. Built with passion.</p>
+    </footer>
 
-        <section id="education" class="section">
-            <h2>Education</h2>
-            <div class="education">
-                <strong>Bachelor of Applied Science, Electrical & Computer Engineering</strong>
-                <span class="university">University of Waterloo</span>
-            </div>
-        </section>
-    </div>
-
-    <div class="scroll-top" onclick="scrollToTop()">↑</div>
+    <!-- Scroll to top button -->
+    <button class="scroll-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">↑</button>
 
     <script>
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('.nav-links a').forEach(anchor => {
+        // Typing effect
+        const typingTexts = [
+            "Building solutions that drive technical wins",
+            "Transforming complex problems into clear demos",
+            "Bridging the gap between sales and engineering",
+            "6+ years of enterprise presales experience"
+        ];
+        let textIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        const typingElement = document.getElementById('typing');
+
+        function type() {
+            const currentText = typingTexts[textIndex];
+
+            if (isDeleting) {
+                typingElement.textContent = currentText.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typingElement.textContent = currentText.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            let typeSpeed = isDeleting ? 30 : 50;
+
+            if (!isDeleting && charIndex === currentText.length) {
+                typeSpeed = 2000;
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                textIndex = (textIndex + 1) % typingTexts.length;
+                typeSpeed = 500;
+            }
+
+            setTimeout(type, typeSpeed);
+        }
+
+        type();
+
+        // Counter animation
+        function animateCounters() {
+            const counters = document.querySelectorAll('.stat-number');
+
+            counters.forEach(counter => {
+                const target = parseInt(counter.getAttribute('data-target'));
+                const suffix = counter.getAttribute('data-suffix') || '';
+                const duration = 2000;
+                const step = target / (duration / 16);
+                let current = 0;
+
+                const updateCounter = () => {
+                    current += step;
+                    if (current < target) {
+                        counter.textContent = Math.floor(current).toLocaleString() + suffix;
+                        requestAnimationFrame(updateCounter);
+                    } else {
+                        counter.textContent = target.toLocaleString() + suffix;
+                    }
+                };
+
+                updateCounter();
+            });
+        }
+
+        // Scroll reveal animation
+        function reveal() {
+            const reveals = document.querySelectorAll('.reveal');
+
+            reveals.forEach(element => {
+                const windowHeight = window.innerHeight;
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+
+                if (elementTop < windowHeight - elementVisible) {
+                    element.classList.add('active');
+                }
+            });
+        }
+
+        // Scroll to top button visibility
+        function toggleScrollTop() {
+            const scrollTop = document.querySelector('.scroll-top');
+            if (window.pageYOffset > 300) {
+                scrollTop.classList.add('visible');
+            } else {
+                scrollTop.classList.remove('visible');
+            }
+        }
+
+        // Initial counter animation when stats section is visible
+        let countersAnimated = false;
+        function checkCounters() {
+            if (countersAnimated) return;
+
+            const statsSection = document.querySelector('.stats');
+            const rect = statsSection.getBoundingClientRect();
+
+            if (rect.top < window.innerHeight && rect.bottom > 0) {
+                animateCounters();
+                countersAnimated = true;
+            }
+        }
+
+        // Event listeners
+        window.addEventListener('scroll', () => {
+            reveal();
+            toggleScrollTop();
+            checkCounters();
+        });
+
+        // Initial calls
+        reveal();
+
+        // Smooth scroll for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
-                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            });
-        });
-
-        // Intersection Observer for fade-in animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
             });
-        }, observerOptions);
-
-        document.querySelectorAll('.section').forEach(section => {
-            observer.observe(section);
         });
 
-        // Scroll to top button
-        const scrollTopBtn = document.querySelector('.scroll-top');
-
+        // Nav background on scroll
         window.addEventListener('scroll', () => {
-            if (window.pageYOffset > 300) {
-                scrollTopBtn.classList.add('visible');
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.style.boxShadow = '0 4px 20px rgba(0,0,0,0.1)';
             } else {
-                scrollTopBtn.classList.remove('visible');
+                nav.style.boxShadow = '0 1px 3px rgba(0,0,0,0.1)';
             }
-        });
-
-        function scrollToTop() {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        // Add ripple effect to project items
-        document.querySelectorAll('.project-item').forEach(item => {
-            item.addEventListener('click', function(e) {
-                const ripple = document.createElement('div');
-                ripple.style.position = 'absolute';
-                ripple.style.borderRadius = '50%';
-                ripple.style.background = 'rgba(52, 152, 219, 0.3)';
-                ripple.style.width = ripple.style.height = '100px';
-                ripple.style.left = e.clientX - this.offsetLeft - 50 + 'px';
-                ripple.style.top = e.clientY - this.offsetTop - 50 + 'px';
-                ripple.style.animation = 'ripple 0.6s ease-out';
-                this.appendChild(ripple);
-                setTimeout(() => ripple.remove(), 600);
-            });
         });
     </script>
 </body>
 </html>
-
