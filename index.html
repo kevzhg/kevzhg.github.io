@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kev Zhang | Solutions Engineer</title>
+    <title>Kev Zhang | Senior Salesforce Developer</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -19,646 +19,62 @@
             --border: #e2e8f0;
             --gradient: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
         }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background: var(--light);
-            color: var(--text);
-            line-height: 1.6;
-        }
-
-        /* Navigation */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            padding: 15px 0;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-weight: 700;
-            font-size: 1.5rem;
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 30px;
-            list-style: none;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--text);
-            font-weight: 500;
-            transition: color 0.3s;
-            position: relative;
-        }
-
-        .nav-links a:hover {
-            color: var(--primary);
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--primary);
-            transition: width 0.3s;
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-            color: white;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-bg {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            opacity: 0.1;
-        }
-
-        .hero-bg::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, var(--primary) 1px, transparent 1px);
-            background-size: 50px 50px;
-            animation: float 20s linear infinite;
-        }
-
-        @keyframes float {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(50px, 50px); }
-        }
-
-        .hero-content {
-            text-align: center;
-            z-index: 1;
-            padding: 20px;
-        }
-
-        .hero h1 {
-            font-size: 4rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-            animation: fadeInUp 0.8s ease;
-        }
-
-        .hero .subtitle {
-            font-size: 1.5rem;
-            color: #94a3b8;
-            margin-bottom: 20px;
-            animation: fadeInUp 0.8s ease 0.2s both;
-        }
-
-        .typing-text {
-            font-size: 1.2rem;
-            color: var(--accent);
-            height: 30px;
-            animation: fadeInUp 0.8s ease 0.4s both;
-        }
-
-        .hero-cta {
-            margin-top: 40px;
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            animation: fadeInUp 0.8s ease 0.6s both;
-        }
-
-        .btn {
-            padding: 15px 30px;
-            border-radius: 8px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.3s;
-            cursor: pointer;
-        }
-
-        .btn-primary {
-            background: var(--gradient);
-            color: white;
-            border: none;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.3);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: white;
-            border: 2px solid rgba(255,255,255,0.3);
-        }
-
-        .btn-secondary:hover {
-            border-color: white;
-            background: rgba(255,255,255,0.1);
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Sections */
-        section {
-            padding: 100px 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .section-title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            text-align: center;
-            margin-bottom: 60px;
-            position: relative;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 4px;
-            background: var(--gradient);
-            border-radius: 2px;
-        }
-
-        /* Stats Section */
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 30px;
-            margin-bottom: 80px;
-        }
-
-        .stat-card {
-            background: var(--card-bg);
-            padding: 30px;
-            border-radius: 16px;
-            text-align: center;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-            transition: transform 0.3s;
-        }
-
-        .stat-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .stat-number {
-            font-size: 3rem;
-            font-weight: 700;
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .stat-label {
-            color: var(--text-light);
-            font-size: 0.9rem;
-            margin-top: 5px;
-        }
-
-        /* Skills Section */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-        }
-
-        .skill-category {
-            background: var(--card-bg);
-            padding: 30px;
-            border-radius: 16px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-            transition: all 0.3s;
-        }
-
-        .skill-category:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-        }
-
-        .skill-category h3 {
-            font-size: 1.2rem;
-            margin-bottom: 20px;
-            color: var(--primary);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .skill-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .skill-tag {
-            background: var(--light);
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            color: var(--text);
-            transition: all 0.3s;
-            cursor: default;
-        }
-
-        .skill-tag:hover {
-            background: var(--primary);
-            color: white;
-            transform: scale(1.05);
-        }
-
-        /* Experience Timeline */
-        .timeline {
-            position: relative;
-            padding-left: 40px;
-        }
-
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: var(--border);
-        }
-
-        .timeline-item {
-            position: relative;
-            margin-bottom: 50px;
-            padding: 30px;
-            background: var(--card-bg);
-            border-radius: 16px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-            transition: all 0.3s;
-            cursor: pointer;
-        }
-
-        .timeline-item:hover {
-            transform: translateX(10px);
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-        }
-
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: -46px;
-            top: 35px;
-            width: 14px;
-            height: 14px;
-            background: var(--primary);
-            border-radius: 50%;
-            border: 3px solid var(--light);
-        }
-
-        .timeline-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 15px;
-        }
-
-        .timeline-title {
-            font-size: 1.3rem;
-            font-weight: 600;
-            color: var(--dark);
-        }
-
-        .timeline-company {
-            color: var(--primary);
-            font-weight: 500;
-        }
-
-        .timeline-date {
-            color: var(--text-light);
-            font-size: 0.9rem;
-            background: var(--light);
-            padding: 5px 12px;
-            border-radius: 20px;
-        }
-
-        .timeline-bullets {
-            list-style: none;
-            margin-top: 20px;
-        }
-
-        .timeline-bullets li {
-            padding: 10px 0;
-            padding-left: 25px;
-            position: relative;
-            color: var(--text);
-            border-bottom: 1px solid var(--border);
-        }
-
-        .timeline-bullets li:last-child {
-            border-bottom: none;
-        }
-
-        .timeline-bullets li::before {
-            content: '>';
-            position: absolute;
-            left: 0;
-            color: var(--accent);
-            font-weight: bold;
-        }
-
-        .expand-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            color: var(--primary);
-            font-weight: 500;
-            margin-top: 15px;
-            cursor: pointer;
-            transition: gap 0.3s;
-        }
-
-        .expand-btn:hover {
-            gap: 10px;
-        }
-
-        .hidden-bullets {
-            display: none;
-        }
-
-        .timeline-item.expanded .hidden-bullets {
-            display: block;
-        }
-
-        /* Projects Section */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 30px;
-        }
-
-        .project-card {
-            background: var(--card-bg);
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-            transition: all 0.3s;
-        }
-
-        .project-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-        }
-
-        .project-header {
-            background: var(--gradient);
-            padding: 30px;
-            color: white;
-        }
-
-        .project-header h3 {
-            font-size: 1.3rem;
-            margin-bottom: 10px;
-        }
-
-        .project-body {
-            padding: 30px;
-        }
-
-        .project-tech {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-top: 15px;
-        }
-
-        .project-tech span {
-            background: var(--light);
-            padding: 5px 12px;
-            border-radius: 15px;
-            font-size: 0.8rem;
-            color: var(--text-light);
-        }
-
-        /* Contact Section */
-        #contact {
-            background: var(--dark);
-            color: white;
-            max-width: none;
-            text-align: center;
-        }
-
-        #contact .section-title {
-            color: white;
-        }
-
-        .contact-grid {
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            flex-wrap: wrap;
-            margin-top: 40px;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            padding: 20px 30px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 12px;
-            transition: all 0.3s;
-            text-decoration: none;
-            color: white;
-        }
-
-        .contact-item:hover {
-            background: rgba(255,255,255,0.2);
-            transform: translateY(-3px);
-        }
-
-        .contact-icon {
-            width: 50px;
-            height: 50px;
-            background: var(--gradient);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-        }
-
-        /* Footer */
-        footer {
-            background: var(--dark);
-            color: var(--text-light);
-            text-align: center;
-            padding: 30px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-        }
-
-        /* Scroll Animation */
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease;
-        }
-
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Mobile Menu */
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--text);
-        }
-
-        /* Responsive */
-        @media (max-width: 968px) {
-            .stats {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .skills-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .projects-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-
-            .mobile-menu-btn {
-                display: block;
-            }
-
-            .stats {
-                grid-template-columns: 1fr;
-            }
-
-            .skills-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .timeline {
-                padding-left: 20px;
-            }
-
-            .timeline-header {
-                flex-direction: column;
-                gap: 10px;
-            }
-
-            .hero h1 {
-                font-size: 2rem;
-            }
-
-            .hero .subtitle {
-                font-size: 1.2rem;
-            }
-        }
-
-        /* Scroll to top button */
-        .scroll-top {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 50px;
-            height: 50px;
-            background: var(--gradient);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            cursor: pointer;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s;
-            font-size: 1.2rem;
-            z-index: 1000;
-        }
-
-        .scroll-top.visible {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .scroll-top:hover {
-            transform: translateY(-5px);
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', sans-serif; background: var(--light); color: var(--text); line-height: 1.6; }
+        nav { position: fixed; top: 0; width: 100%; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); z-index: 1000; padding: 15px 0; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        .nav-container { max-width: 1200px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-weight: 700; font-size: 1.5rem; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .nav-links { display: flex; gap: 30px; list-style: none; }
+        .nav-links a { text-decoration: none; color: var(--text); font-weight: 500; transition: color 0.3s; position: relative; }
+        .nav-links a:hover { color: var(--primary); }
+        .nav-links a::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background: var(--primary); transition: width 0.3s; }
+        .nav-links a:hover::after { width: 100%; }
+        .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); color: white; position: relative; overflow: hidden; }
+        .hero-content { text-align: center; z-index: 1; padding: 20px; }
+        .hero h1 { font-size: 4rem; font-weight: 700; margin-bottom: 10px; }
+        .hero .subtitle { font-size: 1.5rem; color: #94a3b8; margin-bottom: 20px; }
+        .hero-cta { margin-top: 40px; display: flex; gap: 20px; justify-content: center; }
+        .btn { padding: 15px 30px; border-radius: 8px; font-weight: 600; text-decoration: none; transition: all 0.3s; cursor: pointer; }
+        .btn-primary { background: var(--gradient); color: white; border: none; }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(37, 99, 235, 0.3); }
+        .btn-secondary { background: transparent; color: white; border: 2px solid rgba(255,255,255,0.3); }
+        .btn-secondary:hover { border-color: white; background: rgba(255,255,255,0.1); }
+        section { padding: 100px 20px; max-width: 1200px; margin: 0 auto; }
+        .section-title { font-size: 2.5rem; font-weight: 700; text-align: center; margin-bottom: 60px; position: relative; }
+        .section-title::after { content: ''; position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); width: 60px; height: 4px; background: var(--gradient); border-radius: 2px; }
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .skill-category { background: var(--card-bg); padding: 30px; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
+        .skill-category h3 { font-size: 1.2rem; margin-bottom: 20px; color: var(--primary); }
+        .skill-tags { display: flex; flex-wrap: wrap; gap: 10px; }
+        .skill-tag { background: var(--light); padding: 8px 16px; border-radius: 20px; font-size: 0.85rem; color: var(--text); }
+        .timeline { position: relative; padding-left: 40px; }
+        .timeline::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: var(--border); }
+        .timeline-item { position: relative; margin-bottom: 50px; padding: 30px; background: var(--card-bg); border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
+        .timeline-item::before { content: ''; position: absolute; left: -46px; top: 35px; width: 14px; height: 14px; background: var(--primary); border-radius: 50%; border: 3px solid var(--light); }
+        .timeline-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px; }
+        .timeline-title { font-size: 1.3rem; font-weight: 600; color: var(--dark); }
+        .timeline-company { color: var(--primary); font-weight: 500; }
+        .timeline-date { color: var(--text-light); font-size: 0.9rem; background: var(--light); padding: 5px 12px; border-radius: 20px; white-space: nowrap; }
+        .timeline-bullets { list-style: none; margin-top: 20px; }
+        .timeline-bullets li { padding: 10px 0; padding-left: 25px; position: relative; color: var(--text); border-bottom: 1px solid var(--border); }
+        .timeline-bullets li:last-child { border-bottom: none; }
+        .timeline-bullets li::before { content: '>'; position: absolute; left: 0; color: var(--accent); font-weight: bold; }
+        .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .project-card { background: var(--card-bg); border-radius: 16px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
+        .project-header { background: var(--gradient); padding: 30px; color: white; }
+        .project-header h3 { font-size: 1.3rem; margin-bottom: 10px; }
+        .project-body { padding: 30px; }
+        #contact { background: var(--dark); color: white; max-width: none; text-align: center; }
+        #contact .section-title { color: white; }
+        .contact-grid { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; margin-top: 40px; }
+        .contact-item { display: flex; align-items: center; gap: 15px; padding: 20px 30px; background: rgba(255,255,255,0.1); border-radius: 12px; text-decoration: none; color: white; }
+        .contact-icon { width: 50px; height: 50px; background: var(--gradient); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; }
+        footer { background: var(--dark); color: var(--text-light); text-align: center; padding: 30px; border-top: 1px solid rgba(255,255,255,0.1); }
+        @media (max-width: 768px) { .timeline-header { flex-direction: column; gap: 10px; } }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
     <nav>
         <div class="nav-container">
             <div class="logo">KZ</div>
@@ -669,17 +85,13 @@
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
-            <button class="mobile-menu-btn">☰</button>
         </div>
     </nav>
 
-    <!-- Hero Section -->
     <section class="hero">
-        <div class="hero-bg"></div>
         <div class="hero-content">
-            <h1>Kev Zhang</h1>
-            <p class="subtitle">Solutions Engineer</p>
-            <div class="typing-text" id="typing"></div>
+            <h1>KEV ZHANG</h1>
+            <p class="subtitle">Senior Salesforce Developer</p>
             <div class="hero-cta">
                 <a href="#contact" class="btn btn-primary">Get in Touch</a>
                 <a href="#experience" class="btn btn-secondary">View Experience</a>
@@ -687,201 +99,116 @@
         </div>
     </section>
 
-    <!-- Stats Section -->
     <section id="about">
-        <h2 class="section-title">By the Numbers</h2>
-        <div class="stats">
-            <div class="stat-card reveal">
-                <div class="stat-number" data-target="6">0</div>
-                <div class="stat-label">Years Experience</div>
-            </div>
-            <div class="stat-card reveal">
-                <div class="stat-number" data-target="100" data-suffix="k+">0</div>
-                <div class="stat-label">Contract Renewal Secured</div>
-            </div>
-            <div class="stat-card reveal">
-                <div class="stat-number" data-target="40" data-suffix="%">0</div>
-                <div class="stat-label">Coordination Time Reduced</div>
-            </div>
-            <div class="stat-card reveal">
-                <div class="stat-number" data-target="5" data-suffix="+">0</div>
-                <div class="stat-label">Fortune 500 Clients</div>
-            </div>
-        </div>
-
-        <div class="about-text reveal" style="max-width: 800px; margin: 0 auto; text-align: center; font-size: 1.1rem; color: var(--text-light);">
-            <p>Solutions Engineer with 6+ years leading technical sales cycles for enterprise clients. I partner with account executives to conduct discovery, deliver custom demos, and build POC/POV solutions that drive technical wins. Proven track record in presales engineering, solution architecture, and post-sales implementation across SaaS platforms.</p>
+        <h2 class="section-title">Professional Summary</h2>
+        <div class="about-text" style="max-width: 800px; margin: 0 auto; text-align: center; font-size: 1.1rem; color: var(--text-light);">
+            <p>Senior Salesforce Developer with 5+ years of experience specializing in the design, development, and implementation of custom CPQ and quote-to-cash solutions. Proven ability to lead end-to-end Salesforce CPQ implementations, from requirements gathering and data modeling to integration and deployment. Adept at partnering with Sales, Finance, and IT stakeholders to deliver scalable solutions that drive business growth.</p>
         </div>
     </section>
 
-    <!-- Skills Section -->
     <section id="skills">
         <h2 class="section-title">Technical Skills</h2>
         <div class="skills-grid">
-            <div class="skill-category reveal">
-                <h3>🎯 Core Competencies</h3>
+            <div class="skill-category">
+                <h3>Salesforce</h3>
                 <div class="skill-tags">
-                    <span class="skill-tag">Presales Engineering</span>
-                    <span class="skill-tag">Technical Discovery</span>
-                    <span class="skill-tag">POC/POV Development</span>
-                    <span class="skill-tag">Solution Architecture</span>
-                    <span class="skill-tag">Technical Demos</span>
-                    <span class="skill-tag">Stakeholder Management</span>
+                    <span class="skill-tag">Salesforce CPQ</span><span class="skill-tag">Apex</span><span class="skill-tag">Lightning Web Components (LWC)</span><span class="skill-tag">Visualforce</span><span class="skill-tag">Flows</span><span class="skill-tag">Process Builder</span><span class="skill-tag">Triggers</span><span class="skill-tag">Custom Objects</span><span class="skill-tag">Data Modeling</span><span class="skill-tag">SOQL</span>
                 </div>
             </div>
-            <div class="skill-category reveal">
-                <h3>💻 Programming & Tech</h3>
+            <div class="skill-category">
+                <h3>Core Competencies</h3>
                 <div class="skill-tags">
-                    <span class="skill-tag">Python</span>
-                    <span class="skill-tag">JavaScript</span>
-                    <span class="skill-tag">TypeScript</span>
-                    <span class="skill-tag">Java</span>
-                    <span class="skill-tag">SQL</span>
-                    <span class="skill-tag">REST APIs</span>
+                    <span class="skill-tag">Requirements Gathering</span><span class="skill-tag">Solution Design</span><span class="skill-tag">Quote-to-Cash Process</span><span class="skill-tag">Stakeholder Management</span><span class="skill-tag">Agile Methodologies</span><span class="skill-tag">End-to-End Implementation</span><span class="skill-tag">Technical Documentation</span>
                 </div>
             </div>
-            <div class="skill-category reveal">
-                <h3>☁️ Cloud & Infrastructure</h3>
+            <div class="skill-category">
+                <h3>Programming & Technologies</h3>
                 <div class="skill-tags">
-                    <span class="skill-tag">AWS</span>
-                    <span class="skill-tag">Azure</span>
-                    <span class="skill-tag">GCP</span>
-                    <span class="skill-tag">CI/CD</span>
-                    <span class="skill-tag">Docker</span>
-                    <span class="skill-tag">Git</span>
+                    <span class="skill-tag">Python</span><span class="skill-tag">JavaScript</span><span class="skill-tag">REST & SOAP APIs</span><span class="skill-tag">Integration (Boomi)</span><span class="skill-tag">SQL</span><span class="skill-tag">Git</span><span class="skill-tag">CI/CD</span>
                 </div>
             </div>
-            <div class="skill-category reveal">
-                <h3>🔧 Technical Expertise</h3>
+            <div class="skill-category">
+                <h3>Salesforce Certifications</h3>
                 <div class="skill-tags">
-                    <span class="skill-tag">API Integration</span>
-                    <span class="skill-tag">System Integration</span>
-                    <span class="skill-tag">Data Migration</span>
-                    <span class="skill-tag">Process Automation</span>
-                    <span class="skill-tag">SaaS Solutions</span>
-                </div>
-            </div>
-            <div class="skill-category reveal">
-                <h3>🏢 Enterprise Platforms</h3>
-                <div class="skill-tags">
-                    <span class="skill-tag">Salesforce</span>
-                    <span class="skill-tag">ServiceNow</span>
-                    <span class="skill-tag">Airtable</span>
-                    <span class="skill-tag">HR Systems</span>
-                </div>
-            </div>
-            <div class="skill-category reveal">
-                <h3>🤖 Emerging Tech</h3>
-                <div class="skill-tags">
-                    <span class="skill-tag">AI/ML</span>
-                    <span class="skill-tag">LLMs</span>
-                    <span class="skill-tag">Serverless</span>
-                    <span class="skill-tag">Microservices</span>
+                    <span class="skill-tag">Administrator</span><span class="skill-tag">Platform Developer I</span><span class="skill-tag">Omnistudio Consultant</span><span class="skill-tag">Experience Cloud Consultant</span><span class="skill-tag">Salesforce Certified CPQ Specialist (In Progress)</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Experience Section -->
     <section id="experience">
         <h2 class="section-title">Experience</h2>
         <div class="timeline">
-            <div class="timeline-item reveal" onclick="this.classList.toggle('expanded')">
+            <div class="timeline-item">
                 <div class="timeline-header">
                     <div>
-                        <div class="timeline-title">Senior Application Specialist / Solutions Consultant</div>
+                        <div class="timeline-title">Senior Application Specialist / Solutions Consultant (Salesforce Native Platform)</div>
                         <div class="timeline-company">ThinkLP</div>
                     </div>
-                    <span class="timeline-date">Feb 2023 - Present</span>
+                    <span class="timeline-date">Feb 2023 – Present</span>
                 </div>
                 <ul class="timeline-bullets">
-                    <li>Secured $100k+ contract renewal by running proactive discovery sessions with an at-risk client, identifying three unaddressed pain points, and demoing a tailored solution.</li>
-                    <li>Architected a unified integration platform for a Fortune 100 client, connecting Salesforce, ServiceNow, HR systems, and Airtable via REST APIs—reducing cross-team coordination time by 40%.</li>
-                    <li>Delivered a critical data migration two weeks before go-live by writing Python scripts, leading daily standups, and coordinating UAT directly with the client team.</li>
-                    <div class="hidden-bullets">
-                        <li>Built the team's first standardized demo environments and technical documentation in Salesforce CRM, creating a repeatable presales process.</li>
-                        <li>Manage 5+ concurrent presales engagements across discovery calls, POC builds, and demo prep while maintaining quality across all active deals.</li>
-                        <li>Navigate complex enterprise sales cycles by running discovery, building custom demos with actual client data, and presenting ROI analysis to multi-stakeholder buying committees.</li>
-                    </div>
+                    <li>Addressed clients' inefficient <strong>quote-to-cash processes</strong> by designing and implementing custom <strong>Salesforce CPQ</strong> solutions, delivering a streamlined, automated platform that accelerated sales cycles.</li>
+                    <li>Resolved a key prospect's (Nike) data fragmentation challenges by architecting an <strong>API integration</strong> between Salesforce and their disparate ERP systems, providing a unified data view that cut cross-team coordination time by 40%.</li>
+                    <li>Prevented business interruption for a client (TJX) by orchestrating a critical <strong>data migration</strong>, using Python scripts to move legacy sales data into a new <strong>Snowflake DataLake</strong> two weeks ahead of schedule with zero downtime.</li>
+                    <li>Eliminated a key bottleneck in the presales process by building the team's first reusable demo environments and technical guides in Salesforce, cutting new engineer onboarding time by 50%.</li>
+                    <li>Improved close rates by building and presenting custom demos with client data, translating technical features into clear ROI and making value tangible for executive-level stakeholders.</li>
                 </ul>
-                <div class="expand-btn">Show more →</div>
             </div>
-
-            <div class="timeline-item reveal" onclick="this.classList.toggle('expanded')">
+            <div class="timeline-item">
                 <div class="timeline-header">
                     <div>
                         <div class="timeline-title">Salesforce Solutions Consultant / Business Analyst</div>
                         <div class="timeline-company">Revolent / Zensar</div>
                     </div>
-                    <span class="timeline-date">Mar 2021 - Jan 2023</span>
+                    <span class="timeline-date">Mar 2021 – Jan 2023</span>
                 </div>
                 <ul class="timeline-bullets">
-                    <li>Designed Salesforce Sales Cloud solution with automated lead scoring and follow-up workflows for an e-commerce client—increased conversion rates by 20%.</li>
-                    <li>Stepped in to deliver product demonstrations when sales team needed technical support, built custom Salesforce environments showing client-specific workflows.</li>
-                    <div class="hidden-bullets">
-                        <li>Led client-facing sessions to identify blockers during UAT phase, ran solution design reviews, and coordinated fixes with dev team to ensure successful go-lives.</li>
-                    </div>
+                    <li>Increased an e-commerce client's conversion rate by 20% by replacing their manual lead follow-up process with an <strong>end-to-end implementation</strong> of Sales Cloud, delivering an automated system using <strong>custom objects</strong> and <strong>Flows</strong>.</li>
+                    <li>Drove user adoption by developing custom features with <strong>Apex and Visualforce</strong> that addressed critical functionality gaps not met by standard Salesforce, delivering a platform tailored to specific business needs.</li>
+                    <li>Ensured 100% stability for the client’s production environment by managing the full deployment lifecycle and implementing <strong>thorough testing</strong> and change set management to de-risk the process.</li>
                 </ul>
-                <div class="expand-btn">Show more →</div>
             </div>
-
-            <div class="timeline-item reveal">
+            <div class="timeline-item">
                 <div class="timeline-header">
                     <div>
                         <div class="timeline-title">Software Engineer</div>
                         <div class="timeline-company">PointClickCare</div>
                     </div>
-                    <span class="timeline-date">Feb 2019 - Feb 2021</span>
+                    <span class="timeline-date">Feb 2019 – Feb 2021</span>
                 </div>
                 <ul class="timeline-bullets">
                     <li>Developed full-stack features for an enterprise healthcare SaaS platform serving 27,000+ facilities, working across React, TypeScript, Node.js, and Kotlin in a microservices architecture.</li>
-                    <li>Improved E2E test reliability from 70% to 95% by debugging flaky tests and refactoring the CI/CD pipeline, significantly reducing deployment friction.</li>
+                    <li>Improved E2E test reliability from 70% to 95% by debugging flaky tests and refactoring the CI/CD pipeline, significantly reducing deployment friction for the team.</li>
                 </ul>
             </div>
         </div>
     </section>
 
-    <!-- Projects Section -->
     <section id="projects">
         <h2 class="section-title">Projects & Learning</h2>
         <div class="projects-grid">
-            <div class="project-card reveal">
+            <div class="project-card">
                 <div class="project-header">
                     <h3>AI/ML Implementation</h3>
-                    <p>Deep dive into modern AI technologies</p>
                 </div>
                 <div class="project-body">
                     <p>Completed comprehensive LLM course covering transformer architecture and fine-tuning, enabling technical discussions with clients exploring AI integrations.</p>
-                    <div class="project-tech">
-                        <span>LLMs</span>
-                        <span>Transformers</span>
-                        <span>Fine-tuning</span>
-                        <span>AI/ML</span>
-                    </div>
                 </div>
             </div>
-            <div class="project-card reveal">
+            <div class="project-card">
                 <div class="project-header">
                     <h3>Serverless Architecture</h3>
-                    <p>Cloud-native solution design</p>
                 </div>
                 <div class="project-body">
-                    <p>Built serverless solution using Python and AWS Lambda, demonstrating cloud-native architecture patterns for scalable, cost-effective deployments.</p>
-                    <div class="project-tech">
-                        <span>Python</span>
-                        <span>AWS Lambda</span>
-                        <span>Serverless</span>
-                        <span>Cloud Architecture</span>
-                    </div>
+                    <p>Built serverless solution using Python and AWS Lambda, demonstrating cloud-native architecture patterns.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
     <section id="contact">
         <h2 class="section-title">Let's Connect</h2>
-        <p style="color: #94a3b8; margin-bottom: 20px;">Interested in working together? Let's talk.</p>
         <div class="contact-grid">
             <a href="mailto:kevzhg@gmail.com" class="contact-item">
                 <div class="contact-icon">✉</div>
@@ -907,149 +234,9 @@
         </div>
     </section>
 
-    <!-- Footer -->
     <footer>
         <p>Bachelor of Applied Science, Electrical & Computer Engineering - University of Waterloo</p>
-        <p style="margin-top: 10px;">© 2024 Kev Zhang. Built with passion.</p>
     </footer>
 
-    <!-- Scroll to top button -->
-    <button class="scroll-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">↑</button>
-
-    <script>
-        // Typing effect
-        const typingTexts = [
-            "Building solutions that drive technical wins",
-            "Transforming complex problems into clear demos",
-            "Bridging the gap between sales and engineering",
-            "6+ years of enterprise presales experience"
-        ];
-        let textIndex = 0;
-        let charIndex = 0;
-        let isDeleting = false;
-        const typingElement = document.getElementById('typing');
-
-        function type() {
-            const currentText = typingTexts[textIndex];
-
-            if (isDeleting) {
-                typingElement.textContent = currentText.substring(0, charIndex - 1);
-                charIndex--;
-            } else {
-                typingElement.textContent = currentText.substring(0, charIndex + 1);
-                charIndex++;
-            }
-
-            let typeSpeed = isDeleting ? 30 : 50;
-
-            if (!isDeleting && charIndex === currentText.length) {
-                typeSpeed = 2000;
-                isDeleting = true;
-            } else if (isDeleting && charIndex === 0) {
-                isDeleting = false;
-                textIndex = (textIndex + 1) % typingTexts.length;
-                typeSpeed = 500;
-            }
-
-            setTimeout(type, typeSpeed);
-        }
-
-        type();
-
-        // Counter animation
-        function animateCounters() {
-            const counters = document.querySelectorAll('.stat-number');
-
-            counters.forEach(counter => {
-                const target = parseInt(counter.getAttribute('data-target'));
-                const suffix = counter.getAttribute('data-suffix') || '';
-                const duration = 2000;
-                const step = target / (duration / 16);
-                let current = 0;
-
-                const updateCounter = () => {
-                    current += step;
-                    if (current < target) {
-                        counter.textContent = Math.floor(current).toLocaleString() + suffix;
-                        requestAnimationFrame(updateCounter);
-                    } else {
-                        counter.textContent = target.toLocaleString() + suffix;
-                    }
-                };
-
-                updateCounter();
-            });
-        }
-
-        // Scroll reveal animation
-        function reveal() {
-            const reveals = document.querySelectorAll('.reveal');
-
-            reveals.forEach(element => {
-                const windowHeight = window.innerHeight;
-                const elementTop = element.getBoundingClientRect().top;
-                const elementVisible = 150;
-
-                if (elementTop < windowHeight - elementVisible) {
-                    element.classList.add('active');
-                }
-            });
-        }
-
-        // Scroll to top button visibility
-        function toggleScrollTop() {
-            const scrollTop = document.querySelector('.scroll-top');
-            if (window.pageYOffset > 300) {
-                scrollTop.classList.add('visible');
-            } else {
-                scrollTop.classList.remove('visible');
-            }
-        }
-
-        // Initial counter animation when stats section is visible
-        let countersAnimated = false;
-        function checkCounters() {
-            if (countersAnimated) return;
-
-            const statsSection = document.querySelector('.stats');
-            const rect = statsSection.getBoundingClientRect();
-
-            if (rect.top < window.innerHeight && rect.bottom > 0) {
-                animateCounters();
-                countersAnimated = true;
-            }
-        }
-
-        // Event listeners
-        window.addEventListener('scroll', () => {
-            reveal();
-            toggleScrollTop();
-            checkCounters();
-        });
-
-        // Initial calls
-        reveal();
-
-        // Smooth scroll for navigation
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-            });
-        });
-
-        // Nav background on scroll
-        window.addEventListener('scroll', () => {
-            const nav = document.querySelector('nav');
-            if (window.scrollY > 50) {
-                nav.style.boxShadow = '0 4px 20px rgba(0,0,0,0.1)';
-            } else {
-                nav.style.boxShadow = '0 1px 3px rgba(0,0,0,0.1)';
-            }
-        });
-    </script>
 </body>
 </html>
